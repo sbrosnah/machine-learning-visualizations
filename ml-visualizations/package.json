@@ -30,11 +30,12 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss": "^3.4.14",
+    "@tailwindcss/typography": "^0.5.15"
   },
   "devDependencies": {
     "@shadcn/ui": "^0.0.4",
-    "@tailwindcss/typography": "^0.5.15",
     "@types/katex": "^0.16.7",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -44,7 +45,6 @@
     "gh-pages": "^6.2.0",
     "postcss": "^8.4.48",
     "shadcn-ui": "^0.2.3",
-    "tailwindcss": "^3.4.14",
     "typescript": "^5"
   }
 }
