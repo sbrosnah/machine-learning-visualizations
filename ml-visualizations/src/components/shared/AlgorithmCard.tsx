@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import Link from "next/link"
 
-interface AlgorithmCardProps {
+export interface AlgorithmCardProps {
   title: string
   description: string
   route: string
