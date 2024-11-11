@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   },
   basePath: isProduction ? repositoryName : '',
   assetPrefix: isProduction ? repositoryName : '',
+  trailingSlash: true,
   publicRuntimeConfig: {
     basePath: isProduction ? repositoryName : '',
   },
