@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { Card } from "@/components/ui/card"
 import { Slider } from "@/components/ui/slider"
@@ -13,7 +15,7 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-// Utility functions remain the same...
+
 const calculateDensity = (x: number, mu: number, sigma: number): number => {
   return (1 / (sigma * Math.sqrt(2 * Math.PI))) * 
          Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2))

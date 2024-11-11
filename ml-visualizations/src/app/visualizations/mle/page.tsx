@@ -1,13 +1,13 @@
-'use client'
 import { Suspense } from 'react'
 import MLEVisualization from '@/components/mle/MLEVisualization'
-import ContentLoader from '@/components/shared/ContentLoader'
+import DynamicMDXContent from '@/components/shared/DynamicMDXContent'
+import { getContent } from '@/utils/contentUtils'
 
-export default function MLEPage() {
+export default async function MLEPage() {
+  const content = getContent('mle')
 
   return (
     <div className="container mx-auto py-8 space-y-8">
-      {/* Header section */}
       <div className="prose prose-slate max-w-none">
         <h1>Maximum Likelihood Estimation</h1>
         <p>
@@ -17,16 +17,12 @@ export default function MLEPage() {
         </p>
       </div>
 
-      {/* Interactive visualization */}
       <div className="my-8">
         <MLEVisualization />
       </div>
 
-      {/* MDX content */}
       <div className="mt-12">
-        <Suspense fallback={<div>Loading content...</div>}>
-          <ContentLoader contentType="mle" />
-        </Suspense>
+        <DynamicMDXContent content={content} />
       </div>
     </div>
   )

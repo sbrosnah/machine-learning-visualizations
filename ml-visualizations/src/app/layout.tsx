@@ -1,4 +1,4 @@
-import "./globals.css";
+import './globals.css'
 import 'katex/dist/katex.min.css'
 
 export default function RootLayout({

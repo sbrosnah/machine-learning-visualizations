@@ -1,6 +1,4 @@
 'use client'
-import KMeansVisualization from '@/components/kmeans/KMeansVisualization'
-import ContentLoader from '@/components/shared/ContentLoader'
 
 export default function KMeansPage() {
   return (
@@ -12,7 +10,6 @@ export default function KMeansPage() {
           similar data points together based on their features.
         </p>
       </div>
-      <ContentLoader contentType="mle" />
     </div>
   )
 }
