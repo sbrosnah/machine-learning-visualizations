@@ -1,4 +1,4 @@
-name: publish-to-github-pages
+name: publish-to-github-pagess
 on:
   push:
     branches:
