@@ -1,26 +1,20 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -31,13 +25,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: npm
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+          cache: 'npm'
+          
+      - name: List directory contents
+        run: ls -la
         
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm cache clean --force
+          npm install
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
         
       - name: Build
         run: npm run build
@@ -47,7 +46,6 @@ jobs:
         with:
           path: ./out
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
