@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === 'production';
-const repoName = '';
+const repoName = '/machine-learning-visualizations';
 
 const nextConfig: NextConfig = {
   output: 'export',
