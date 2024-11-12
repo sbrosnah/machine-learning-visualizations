@@ -25,15 +25,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: 'npm'
-          
-      - name: List directory contents
-        run: ls -la
-        
+      
       - name: Install dependencies
         run: |
-          npm cache clean --force
           npm install
+          git status
+          ls -la
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
