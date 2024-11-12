@@ -21,27 +21,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Debug directory
+        run: |
+          echo "Working directory:"
+          pwd
+          echo "Directory contents:"
+          ls -la
+          
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "18"
       
       - name: Install dependencies
+        working-directory: ${{ github.workspace }}
         run: |
-          npm install
-          git status
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
           ls -la
+          npm install
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
       - name: Build
+        working-directory: ${{ github.workspace }}
         run: npm run build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ${{ github.workspace }}/out
 
   deploy:
     environment:
