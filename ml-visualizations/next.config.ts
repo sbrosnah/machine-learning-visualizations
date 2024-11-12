@@ -1,20 +1,9 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production';
-const repoName = '/machine-learning-visualizations';
-
 const nextConfig: NextConfig = {
+  basePath: "/machine-learning-visualizations",
   output: 'export',
-  images: {
-    unoptimized: true,
-  },
-  basePath: isProd ? repoName : '',
-  assetPrefix: isProd ? repoName : '',
-  trailingSlash: true,
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false };
-    return config;
-  }
+  reactStrictMode: true
 };
 
 export default nextConfig;
