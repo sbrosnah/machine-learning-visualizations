@@ -68,7 +68,6 @@
   }
 }
 
-@import 'katex/dist/katex.min.css';
 @import 'prismjs/themes/prism-tomorrow.css';
 
 /* Custom styles for anchor links */
