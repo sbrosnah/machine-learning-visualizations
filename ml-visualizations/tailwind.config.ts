@@ -70,6 +70,25 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""'
+            },
+            'code::after': {
+              content: '""'
+            },
+            'blockquote p:first-of-type::before': {
+              content: '""'
+            },
+            'blockquote p:last-of-type::after': {
+              content: '""'
+            },
+            maxWidth: '100ch',
+          }
+        }
+      }
     },
   },
   plugins: [

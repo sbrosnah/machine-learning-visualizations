@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import MLEVisualization from '@/components/mle/MLEVisualization'
 import DynamicMDXContent from '@/components/shared/DynamicMDXContent'
 import { getContent } from '@/utils/contentUtils'

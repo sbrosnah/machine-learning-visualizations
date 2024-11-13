@@ -69,17 +69,25 @@ export interface MLEVisualizationProps {
 }
 
 
+/**
+A component is a function that returns UI elements
+Takes props that can have default values as input
+ */
 export default function MLEVisualization({
   initialMean = 0,
   initialStandardDev = 1,
   sampleSize = 100
 }: MLEVisualizationProps) {
+  //useState is a react Hook letting you add state to components
   const [mean, setMean] = useState(initialMean)
   const [standardDev, setStandardDev] = useState(initialStandardDev)
   const [densityCurve, setDensityCurve] = useState<DataPoint[]>([])
   const [sampleData, setSampleData] = useState<DataPoint[]>([])
   const [logLikelihood, setLogLikelihood] = useState<number>(0)
 
+  //The code in the effect runs when the values in the dependency array (mean, standardDev, sampleData) change. 
+  //Empty array would mean to run once on mount.
+  //No array means run run on every render
   useEffect(() => {
     setDensityCurve(generateDensityCurve(mean, standardDev))
     setLogLikelihood(calculateLogLikelihood(sampleData, mean, standardDev))
@@ -93,6 +101,10 @@ export default function MLEVisualization({
     setSampleData(generateSampleData(sampleSize, mean, standardDev))
   }
 
+  //This is the TSX code that allows you to write HTML-like code in JavaScript
+  // Use className instead of class
+  //Can embed JavaScript by using curly braces {}
+  //Must return a single parent element (or fragment)
   return (
     <Card className="p-6 space-y-6">
       <div className="space-y-2">
@@ -162,6 +174,7 @@ export default function MLEVisualization({
         <div className="space-y-2">
           <p className="text-sm font-medium">Log Likelihood: {logLikelihood.toFixed(2)}</p>
           <Button 
+            //This is how events are handled. Functions aren't executed directly. Instead the functions are passed in and will be called when the event occurs.
             onClick={handleNewSample}
             className="w-full"
           >

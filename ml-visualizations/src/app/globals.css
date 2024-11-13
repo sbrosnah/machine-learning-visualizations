@@ -67,3 +67,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+@import 'katex/dist/katex.min.css';
+@import 'prismjs/themes/prism-tomorrow.css';
+
+/* Custom styles for anchor links */
+.anchor {
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor {
+  opacity: 1;
+}
+
+/* Custom styles for code blocks */
+pre {
+  margin: 1em 0;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+/* Task list styles */
+.contains-task-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.task-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
