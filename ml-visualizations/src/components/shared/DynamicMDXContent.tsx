@@ -11,6 +11,9 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeExternalLinks from 'rehype-external-links'
 
 export default function DynamicMDXContent({ content }: { content: string }) {
+
+  //TODO: Add some delimiter to split the string into an array of strings and then rendr the 
+  //separate strings into different components.
   const [mdxSource, setMdxSource] = useState<MDXRemoteSerializeResult | null>(null)
 
   useEffect(() => {
