@@ -13,6 +13,12 @@ export default function Home() {
       description: "Interactive clustering visualization with adjustable parameters.",
       route: "/visualizations/kmeans",
       difficulty: "Beginner"
+    },
+    {
+      title: "Multivariate Graphical Models",
+      description: "Interactive clustering visualization with adjustable parameters.",
+      route: "/visualizations/mv-graph-models",
+      difficulty: "Advanced"
     }
   ]
 
