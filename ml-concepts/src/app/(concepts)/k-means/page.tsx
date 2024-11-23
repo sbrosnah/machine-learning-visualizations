@@ -1,5 +1,7 @@
+import MarkdownPage from "@/app/components/MarkdownPage";
+
 export default function KMeansPage() {
     return (
-        <div>K-Means</div>
+        <MarkdownPage slug="k-means"/>
     );
 }

@@ -22,7 +22,7 @@ export default function Home() {
     }
   ]
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
+    <main className="min-h-screen p-8 bg-gray-50 dark:bg-gray-500">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">Machine Learning Concepts</h1>
         <p className="text-gray-600 mb-8">

@@ -1,5 +1,7 @@
+import MarkdownPage from "@/app/components/MarkdownPage";
+
 export default function BayesianInferencePage() {
     return (
-        <div>Bayesian Inference</div>
+        <MarkdownPage slug="bayesian-inference" />
     );
 }
