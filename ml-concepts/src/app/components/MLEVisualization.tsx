@@ -1,10 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card } from "@/components/ui/card"
-import { Slider } from "@/components/ui/slider"
-import { Button } from "@/components/ui/button"
-import { DataPoint } from '@/types'
+import { Card } from "@/app/components/Card"
+import { Slider } from "@/app/components/slider"
+import { Button } from "@/app/components/button"
 import {
   ScatterChart,
   Scatter,
@@ -15,6 +14,10 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
+interface DataPoint {
+  x: number
+  density?: number
+}
 
 const calculateDensity = (x: number, mu: number, sigma: number): number => {
   return (1 / (sigma * Math.sqrt(2 * Math.PI))) * 

@@ -4,7 +4,4 @@ export type ComponentType = React.ComponentType<{
     [key: string]: any;
 }>
 
-export interface DataPoint {
-    x: number
-    density?: number
-}
+

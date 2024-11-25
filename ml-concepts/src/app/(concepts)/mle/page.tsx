@@ -1,8 +1,12 @@
 import MarkdownPage from "@/app/components/MarkdownPage";
+import MLEVisualization from "@/app/components/MLEVisualization";
 
 export default function MLEPage() {
 
     return (
-        <MarkdownPage slug="mle"/>
+        <>
+            <MLEVisualization/>
+            <MarkdownPage slug="mle"/>
+        </>
     );
 }
