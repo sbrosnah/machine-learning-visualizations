@@ -14,7 +14,7 @@ export default async function MarkdownPage({ slug }: { slug: string}) {
     return (
         <article className="max-w-4xl mx-auto px-4 py-8">
             <Markdown
-                className="prose prose-slate dark:prose-invert max-w-none" 
+                className="prose max-w-none" 
                 remarkPlugins={[remarkGfm, remarkMath]} 
                 rehypePlugins={[rehypeKatex]}
                 components = {{

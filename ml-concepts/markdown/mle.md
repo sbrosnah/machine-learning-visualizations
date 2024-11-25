@@ -1,97 +1,31 @@
-# Markdown Features Showcase
+## Theory
 
-Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. Here's a complete list of what you can do with Markdown:
+MLE works by finding the parameters that make the observed data most probable.
+For a given set of observations and a statistical model, the MLE gives us the
+parameters that maximize the likelihood function.
 
----
+### Key Concepts
 
-## 1. Headings
-You can create headings by using `#` symbols:
+1. **Likelihood Function**: Measures how well a statistical model fits the observed data
+2. **Parameter Estimation**: Process of finding the best parameters for our model
+3. **Optimization**: Usually involves maximizing the log-likelihood function
 
+### Mathematical Foundation
 
-# Heading 1
-## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
+The likelihood function $L(\theta; x)$ represents the probability of observing the data x given the parameters θ. For a normal distribution, we have two parameters to estimate:
 
-**Bold text**\
-*Italic text*\
-_Also italic_\
-__Also bold__\
-~~Strikethrough~~
+- μ (mean)
+- σ (standard deviation)
 
-
-- Item 1
-- Item 2
-  - Sub-item 1
-  - Sub-item 2
-- Item 3
-
-
-1. First item
-2. Second item
-3. Third item
-   1. Sub-item
-   2. Sub-item
-
-
-[Clickable link](https://example.com)
-
-
-![Alt text](https://via.placeholder.com/150)
-
-```javascript
-const greet = () => {
-  console.log("Hello, Markdown!");
-};
-```
-
-> This is a blockquote.
-> It can span multiple lines.
-
-| Column 1 | Column 2 | Column 3 |
-|----------|----------|----------|
-| Data 1   | Data 2   | Data 3   |
-| Data 4   | Data 5   | Data 6   |
-
-- [x] Task 1
-- [ ] Task 2
-- [ ] Task 3
-
----
-***
-___
-
-Here's a sentence with a footnote.[^1]
-
-[^1]: This is the footnote text.
-
-# Advanced Markdown Features
-
----
-
-## 1. Mermaid Diagrams
-Mermaid lets you visualize diagrams and flowcharts using text.
-
-```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Fix it]
-    D --> A
-```
+The log-likelihood function for n independent observations from a normal distribution is:
 
 $$
-\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+\ln L(\mu, \sigma; x) = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2
 $$
 
-Term 1
-: Definition of Term 1
+### How to Use the Visualization
 
-Term 2
-: Definition of Term 2
-: Another definition for Term 2
-
-Term 3
-: Definition of Term 3
+1. **Adjust the Mean**: Use the first slider to move the center of the distribution
+2. **Change Standard Deviation**: The second slider controls the spread of the distribution
+3. **Generate New Samples**: Click the button to create a new random sample
+4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters
