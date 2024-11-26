@@ -29,3 +29,7 @@ $$
 2. **Change Standard Deviation**: The second slider controls the spread of the distribution
 3. **Generate New Samples**: Click the button to create a new random sample
 4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters
+
+```javascript
+function async
+```

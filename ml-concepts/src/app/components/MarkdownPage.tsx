@@ -1,4 +1,4 @@
-import { getMarkdownContent } from '@/lib/utils';
+import { getMarkdownContent } from '@/lib/markdown-utils';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import 'katex/dist/katex.min.css'
