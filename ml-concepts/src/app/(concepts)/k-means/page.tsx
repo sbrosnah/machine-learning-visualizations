@@ -1,7 +1,9 @@
 import MarkdownPage from "@/app/components/MarkdownPage";
+import { getMarkdownContent } from "@/lib/markdown-utils";
 
-export default function KMeansPage() {
+export default async function KMeansPage() {
+    const content = await getMarkdownContent('k-means')
     return (
-        <MarkdownPage slug="k-means"/>
+        <MarkdownPage content={content}/>
     );
 }

@@ -1,4 +1,3 @@
-import { getMarkdownContent } from '@/lib/markdown-utils';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import 'katex/dist/katex.min.css'
@@ -6,25 +5,20 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import rehypeRaw from 'rehype-raw';
 
 
-export default async function MarkdownPage({ slug }: { slug: string}) {
-    const content = await getMarkdownContent(slug)
-
+export default async function MarkdownPage({ content }: { content: string}) {
     return (
-        <article className="max-w-4xl mx-auto px-4 py-8">
+        <article className="max-w-5xl mx-auto px-4 py-8">
             <Markdown
                 className="prose max-w-none" 
                 remarkPlugins={[remarkGfm, remarkMath]} 
-                rehypePlugins={[rehypeKatex]}
+                rehypePlugins={[rehypeKatex, rehypeRaw]}
                 components = {{
                     code({ className, children, ...props }: any) {
                         const match = /language-(\w+)/.exec(className || '');
                         const language = match ? match[1] : '';
-                  
-                        // if (language === 'mermaid') {
-                        //   return <Mermaid chart={String(children)} />;
-                        // }
                   
                         if (!className) {
                           return (

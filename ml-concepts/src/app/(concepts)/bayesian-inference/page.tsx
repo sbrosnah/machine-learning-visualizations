@@ -1,7 +1,9 @@
 import MarkdownPage from "@/app/components/MarkdownPage";
+import { getMarkdownContent } from "@/lib/markdown-utils";
 
-export default function BayesianInferencePage() {
+export default async function BayesianInferencePage() {
+    const content = await getMarkdownContent('bayesian-inference')
     return (
-        <MarkdownPage slug="bayesian-inference" />
+        <MarkdownPage content={content} />
     );
 }

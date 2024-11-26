@@ -5,7 +5,7 @@ Bayesian Inference is a statistical method that updates the probability of a hyp
 
 In this context, a hypothesis can be:
 - A binary label in classification tasks
-  - e.g. classifying whether or not to trust an alarm predicts sun explosions with high accuracy. 
+  - e.g. classifying whether or not to trust an alarm that predicts sun explosions with high accuracy. 
 - Parameter estimation
   - e.g. commute time to work
   -  This is useful because it quantifies uncertainty of parameter estimation.

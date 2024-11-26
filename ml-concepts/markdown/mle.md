@@ -23,13 +23,11 @@ $$
 \ln L(\mu, \sigma; x) = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln(\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2
 $$
 
+%%%
+
 ### How to Use the Visualization
 
 1. **Adjust the Mean**: Use the first slider to move the center of the distribution
 2. **Change Standard Deviation**: The second slider controls the spread of the distribution
 3. **Generate New Samples**: Click the button to create a new random sample
 4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters
-
-```javascript
-function async
-```
