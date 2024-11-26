@@ -81,6 +81,7 @@ export default function MLEVisualization({
   initialStandardDev = 1,
   sampleSize = 100
 }: MLEVisualizationProps) {
+  
   //useState is a react Hook letting you add state to components
   const [mean, setMean] = useState(initialMean)
   const [standardDev, setStandardDev] = useState(initialStandardDev)
