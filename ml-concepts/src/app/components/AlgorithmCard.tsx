@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription } from "@/app/components/Card"
+import { Card, CardHeader, CardTitle, CardDescription } from "@/app/components/card"
 import Link from "next/link"
 
 export interface AlgorithmCardProps {

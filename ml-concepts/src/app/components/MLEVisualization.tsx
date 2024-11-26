@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card } from "@/app/components/Card"
+import { Card } from "@/app/components/card"
 import { Slider } from "@/app/components/slider"
 import { Button } from "@/app/components/button"
 import {
