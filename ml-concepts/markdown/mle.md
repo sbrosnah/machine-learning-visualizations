@@ -83,7 +83,7 @@ $$
 \hat{\theta} = \argmax_{\theta} \ell(\theta) = \argmax_{\theta} \sum_{i=1}^n \log(\mathbb{P}(x_i \mid \theta))
 $$
 
-Note: The likelihood and log-likelihood functions have the same maximum because the log function strictly increases, but at a logarithmically slower rate than a regular linear function. 
+Note: The likelihood and log-likelihood functions have the same maximum because both the log and linear functions monotonically increase, but the log function grows logarithmically slower rate than a regular linear function. 
 
 //TODO: Add a plot of the log
 
