@@ -15,8 +15,8 @@ export default async function MLEPage() {
             <MarkdownPage content={chunks[0]}/>
             <CoinFlip/>
             <MarkdownPage content={chunks[1]}/> 
-            <MLEVisualization/>
-            <MarkdownPage content={chunks[2]}/> 
+            {/* <MLEVisualization/>
+            <MarkdownPage content={chunks[2]}/>  */}
         </>
     );
 }
