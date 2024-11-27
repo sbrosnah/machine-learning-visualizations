@@ -1,5 +1,6 @@
 import MarkdownPage from "@/app/components/MarkdownPage";
-import MLEVisualization from "@/app/components/MLEVisualization";
+import CoinFlip from "@/app/components/mle/CoinFlip";
+import MLEVisualization from "@/app/components/mle/MLEVisualization";
 import { MARKDOWN_DELIMITER } from "@/lib/constants";
 import { getMarkdownContent } from '@/lib/markdown-utils';
 
@@ -12,8 +13,10 @@ export default async function MLEPage() {
     return (
         <>
             <MarkdownPage content={chunks[0]}/>
-            <MLEVisualization/>
+            <CoinFlip/>
             <MarkdownPage content={chunks[1]}/> 
+            <MLEVisualization/>
+            <MarkdownPage content={chunks[2]}/> 
         </>
     );
 }

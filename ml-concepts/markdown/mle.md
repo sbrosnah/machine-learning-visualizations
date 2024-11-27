@@ -44,8 +44,6 @@ If $\theta = .9$, then $P(HHHHT \mid \theta) = (.9)^4(.1) > .00009$
 
 We can do this for every value $\theta \in [0, 1]$ and find the $\theta$ that maximizes $P(HHHHT \mid \theta)$. This is the maximum likelihood estimate.
 
-<--! TODO: Add a plot where we have a button to flip a coin and a slider for theta. We show both the likelihood and log-likelihood as the data changes -->
-
 $$
 \hat{\theta} = \argmax_{\theta} \mathcal{L}(\theta) = \argmax_{\theta} = P(HHHHT \mid \theta) = \theta^4(1-\theta) 
 $$
@@ -105,6 +103,10 @@ $$
 \nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0  \\
 \implies \hat{\theta} = \frac{4}{5}
 $$
+
+%%%
+
+Test
 
 %%%
 
