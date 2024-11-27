@@ -8,7 +8,8 @@ import {
     XAxis,
     YAxis,
     Legend,
-    Line
+    Line,
+    Dot
 } from 'recharts';
 import { Card } from '@/app/components/card';
 import { Slider } from '@/app/components/slider'
@@ -42,16 +43,7 @@ function calculateLogLikelihoods(thetas: number[], numHeads: number, numTails: n
     return logLikelihoods
 }
 
-
-
-
-interface DataPoint {
-    x: number;
-    likelihood: number;
-    logLikelihood: number;
-}
-
-const getData = (numHeads: number=4, numTails: number=1, numThetas:number=100): DataPoint[] => {
+const getData = (numHeads: number=4, numTails: number=1, numThetas:number=200): DataPoint[] => {
     const data: DataPoint[] = []
     if(numHeads + numTails === 0) return data;
 
@@ -66,16 +58,50 @@ const getData = (numHeads: number=4, numTails: number=1, numThetas:number=100): 
 }
 
 
+
+interface DataPoint {
+    x: number;
+    likelihood: number;
+    logLikelihood: number;
+}
+
+
 export default function CoinFlip() {
 
     const [numHeads, setNumHeads] = useState<number>(0)
     const [numTails, setNumTails] = useState<number>(0)
     const [thetaStar, setThetaStar] = useState<number>(.5)
     const [data, setData] = useState<DataPoint[]>(getData(numHeads, numTails))
+    const [maxIndex, setMaxIndex] = useState<number>(-1)
+    const [thetaHat, setThetaHat] = useState<number>()
+
 
     useEffect(() => {
         setData(getData(numHeads, numTails))
+        setThetaHat(() => {
+            if(numHeads + numTails === 0) return -1
+            return numHeads / (numHeads + numTails)
+        })
     }, [numHeads, numTails])
+
+
+    useEffect(() => {
+        setMaxIndex(() => {
+            let mi = -1
+             let max = -Infinity
+
+            for(let i = 0; i < data.length; i++) {
+                if(data[i].logLikelihood > max) {
+                    max = data[i].logLikelihood
+                    mi = i
+                }
+            }
+
+            return mi;
+
+        })
+    }, [data])
+
 
     function flipCoin() {
         if (Math.random() < thetaStar) {
@@ -85,12 +111,20 @@ export default function CoinFlip() {
         }
     }
 
+    const CustomDot = (props: any) => {
+        const { cx, cy, index } = props; // Use `index` to determine the specific dot
+        if (index === maxIndex) {
+            return <Dot cx={cx} cy={cy} r={6} fill='none' stroke='black' strokeWidth={2} />; // Customize the dot appearance here
+        }
+        return null; // Hide all other dots
+    };
+
 
     return (
         <Card className="p-6 space-y-6">
             <div className="space-y-4">
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">True Theta</label>
+                    <label className="text-sm font-medium">True Parameter</label>
                     <Slider
                         value={[thetaStar]}
                         onValueChange={(value) => {
@@ -104,18 +138,24 @@ export default function CoinFlip() {
                         step={0.01}
                     />
                     <p className="text-sm text-gray-500">Current value: {thetaStar.toFixed(2)}</p>
-                    <p className="text-sm text-gray-500">Number of heads: {numHeads}</p>
-                    <p className="text-sm text-gray-500">Number of tails: {numTails}</p>
+                    <p className="text-sm font-medium text-center">Estimated Parameter: {thetaHat != null && thetaHat >= 0 ? thetaHat.toFixed(2) : ''}</p>
+
                 </div>
             </div>
 
-            <Button 
-                //This is how events are handled. Functions aren't executed directly. Instead the functions are passed in and will be called when the event occurs.
-                onClick={flipCoin}
-                className="w-full"
-            >
-                Flip Coin
-            </Button>
+            <div className='w-full flex flex-row content-between items-center justify-between'>
+                <Button 
+                    //This is how events are handled. Functions aren't executed directly. Instead the functions are passed in and will be called when the event occurs.
+                    onClick={flipCoin}
+                    className="w-28"
+                >
+                    Flip Coin
+                </Button>
+                <p className="text-sm text-gray-500 w-fit">Number of heads: {numHeads}</p>
+                <p className="text-sm text-gray-500 w-fit">Number of tails: {numTails}</p>
+            </div>
+
+
 
             <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -126,11 +166,10 @@ export default function CoinFlip() {
                             dataKey="x"
                             type="number"
                             name="value"
-                            domain={['auto', 'auto']} />
+                            domain={[0, 1]} />
                         <YAxis />
-                        {/* <Tooltip /> */}
                         <Legend />
-                        <Line type="monotone" dataKey="likelihood" stroke="#8884d8" dot={false} />
+                        <Line type="monotone" dataKey="likelihood" stroke="#8884d8" dot={<CustomDot />} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
@@ -143,11 +182,10 @@ export default function CoinFlip() {
                             dataKey="x"
                             type="number"
                             name="value"
-                            domain={['auto', 'auto']} />
+                            domain={[0, 1]} />
                         <YAxis />
-                        {/* <Tooltip /> */}
                         <Legend />
-                        <Line type="monotone" dataKey="logLikelihood" name="log-likelihood" stroke="#82ca9d" dot={false} />
+                        <Line type="monotone" dataKey="logLikelihood" name="log-likelihood" stroke="#82ca9d" dot={<CustomDot />} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

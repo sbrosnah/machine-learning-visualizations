@@ -81,9 +81,7 @@ $$
 \hat{\theta} = \argmax_{\theta} \ell(\theta) = \argmax_{\theta} \sum_{i=1}^n \log(\mathbb{P}(x_i \mid \theta))
 $$
 
-Note: The likelihood and log-likelihood functions have the same maximum because both the log and linear functions monotonically increase, but the log function grows logarithmically slower rate than a regular linear function. 
-
-//TODO: Add a plot of the log
+Note: The likelihood and log-likelihood functions have the same maximum because both the log and linear functions monotonically increase, but the log function grows logarithmically slower rate than a regular linear function. Because of this slower rate of growth, maximizing the log is not only easier to compute because of the summation, but far more stable as the number of samples increases (see for yourself in the interactive visualization below).
 
 There are cases where we can find a closed-form solution to the optimization problem, but in most cases, we must use a numerical method to find the maximum.  
 
@@ -106,13 +104,26 @@ $$
 
 %%%
 
-Test
+### How to Use the Visualization
 
-%%%
+1. **Adjust $\theta^*$ (the true parameter)**: Use the slider to change the parameter.
+2. **Generate Samples**: Click the button to simulate coin flips.
+3. **Observe Likelihood and Log-Likelihood**: Watch how plots change as you adjust the parameters and generate more samples.
+4. **Observe the estimated parameter at the top ($\hat{\theta}$)**: This is the x value where the max log-likelihood and max likelihood values occur.
+
+**Things to Note**
+
+- The scale on the y-axis of the likelihood plot gets extremely small as the number of samples increases. 
+- The likelihood plot moves around a lot more than the log-likelihood plot.
+- The maximum occurs at the same place in both plots leading to the same parameter estimate.
+
+
+
+<!-- %%%
 
 ### How to Use the Visualization
 
 1. **Adjust the Mean**: Use the first slider to move the center of the distribution
 2. **Change Standard Deviation**: The second slider controls the spread of the distribution
 3. **Generate New Samples**: Click the button to create a new random sample
-4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters
+4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters -->
