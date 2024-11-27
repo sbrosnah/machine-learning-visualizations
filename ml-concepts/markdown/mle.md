@@ -117,6 +117,71 @@ $$
 - The likelihood plot moves around a lot more than the log-likelihood plot.
 - The maximum occurs at the same place in both plots leading to the same parameter estimate.
 
+### Log-Odds
+
+Using MLE to estimate the parameters for problems with closed-form solutions like this works fine, but we can loosen the constraints of our optimization problem by estimating something called the log-odds instead. 
+
+First, why is estimating the log-odds useful? 
+- **Unconstrained Optimization**: Estimating the log-odds is advantagous because we aren't confined to the range $[0, 1]$. $\theta$ is because it's a probability. 
+- **Improved Numerical Stability**: This is particularly useful when $\theta$ approaches 0 or 1 because the log of probabilites parameterized by $\theta$ can be undefined depending on the distribution. For example, if $\theta$ is 0 or 1 in a Bernoulli distribution (like in the biased coin example), the log-likelihood is undefined.  
+
+I will show you how to do this for the biased coin problem (or any Bernoulli distribution for that matter) but keep in mind that this can be applied to more complicated distributions.
+
+Given $\{x_i\}_{i=1}^n$ where $x_i \in \{0, 1\}$, i.i.d. samples drawn from a Bernoulli distribution:
+
+$$
+P(X = x) =
+\begin{cases} 
+\frac{\exp(w)}{1 + \exp(w)} \triangleq \theta
+& \text{if } x = 1, \\
+\frac{1}{1 + \exp(w)} \triangleq 1 - \theta
+& \text{if } x = 0.
+\end{cases}
+$$
+
+We can actually re-write this using a single equation which makes optimization even easier. 
+
+$$
+P(X = x) = \frac{\exp(wx)}{1 + \exp(w)}
+$$
+
+We are mapping some equation using a set of weights $w$ (our log-odds) to the same range as $\theta$ and assume they are equal. As mentioned earlier, this is a nice trick (used in a lot of proofs) because we don't need to worry about the constraint $\theta \in [0, 1]$.  
+
+Notice that if x = 1, the equation is $P(X = 1) = \frac{\exp(w)}{1 + \exp(w)}$ and if x = 0, it is $P(X = 0) = \frac{1}{1 + \exp(w)}$. These are the same equations used in our distribution definition earlier. 
+
+%%%
+
+Also notice that this is a valid probability distribution because both $P(X=1)$ and $P(X=0)$ will sum to 1 and are always positive. 
+
+Now, let's try to estimate $w$. 
+
+$$
+\ell(\theta) = \sum_{i=1}^n \log(P(x_i \mid \theta)) \\
+= \sum_{i=1}^n \left[ x_i w - \log\left(1 + \exp(w)\right) \right]
+= \left( \sum_{i=1}^n x_i \right) w - n \log\left(1 + \exp(w)\right)\\
+= n \left( \bar{x}w - \log\left(1 + \exp(w)\right) \right)
+$$
+
+Where $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$
+
+Now that we have the log-likelihood function, we calculate the gradient, set it to 0, and then solve for $\hat{w}$. 
+
+$$
+\nabla \ell(\hat{w}) = n \left( \bar{x}\hat{w} - \log\left(1 + \exp(\hat{w})\right) \right) = 0 \\
+\implies \hat{w} = \log\left(\frac{\bar{x}}{1 - \bar{x}}\right)
+$$
+
+We can then use $\hat{w}$ to solve for $\hat{\theta}$ using the distribution definition from earlier.
+
+$$
+\hat{\theta} = \frac{\exp(\hat{w})}{1 + \exp(\hat{w})}
+$$
+
+
+### Example: Gaussian Distribution
+
+
+
 
 
 <!-- %%%

@@ -3,6 +3,7 @@ import CoinFlip from "@/app/components/mle/CoinFlip";
 // import MLEVisualization from "@/app/components/mle/MLEVisualization";
 import { MARKDOWN_DELIMITER } from "@/lib/constants";
 import { getMarkdownContent } from '@/lib/markdown-utils';
+import Image from 'next/image'
 
 
 export default async function MLEPage() {
@@ -15,8 +16,8 @@ export default async function MLEPage() {
             <MarkdownPage content={chunks[0]}/>
             <CoinFlip/>
             <MarkdownPage content={chunks[1]}/> 
-            {/* <MLEVisualization/>
-            <MarkdownPage content={chunks[2]}/>  */}
+            <Image className="max-w-5xl mx-auto px-4 py-8" src="/images/log-odds.png" alt="MLE Diagram" width={1000} height={1000}/>
+            <MarkdownPage content={chunks[2]}/> 
         </>
     );
 }
