@@ -5,6 +5,21 @@
 Maximum Likelihood Estimation (MLE) is a statisitical method that estimates the parameters of a model or distribution my maximizing the likelihood function. The 
 likelihood function is a function of the parameters where the probability of observing some fixed data given those parameters is quantified.  
 
+### Quick Review
+
+<u>Parametric Family:</u> A collection of distributions that are characterized by a common mathematical form and set of parameters, but differ based on values of those
+parameters. 
+
+Examples of parametric families include:
+- Normal (Gaussian): $f(x \mid \mu, \sigma^2)$
+- Exponential: $f(x \mid \lambda)$
+- Gamma: $f(x \mid k, \theta)$
+- Bernoulli: $f(x \mid \theta)$
+
+<u>Closed-Form Solution:</u> Can be written explicitly in terms of known functions and operations. 
+
+<u>Numerical Method:</u> Computational technique used to approximate solutions. 
+
 ### Illustative Example - Biased Coin
 Assume we have a biased coin whose probability of heads is unknown. We can define a bernoulli distribution with parameter $\theta$ that models the probability of heads.  
 $$
@@ -23,22 +38,17 @@ We want to find the probability of observing the data given a parameter $\theta$
 
 For example, which is more likely? $\theta = .9$ or $\theta = .1$?  
 
+If $\theta = .1$, then $P(HHHHT \mid \theta) = \theta^4(1-\theta) = (.1)^4(.9) \approx .00009$
 
+If $\theta = .9$, then $P(HHHHT \mid \theta) = (.9)^4(.1) > .00009$
 
-### Quick Review
+We can do this for every value $\theta \in [0, 1]$ and find the $\theta$ that maximizes $P(HHHHT \mid \theta)$. This is the maximum likelihood estimate.
 
-<u>Parametric Family:</u> A collection of distributions that are characterized by a common mathematical form and set of parameters, but differ based on values of those
-parameters. 
+<--! TODO: Add a plot where we have a button to flip a coin and a slider for theta. We show both the likelihood and log-likelihood as the data changes -->
 
-Examples of parametric families include:
-- Normal (Gaussian): $f(x \mid \mu, \sigma^2)$
-- Exponential: $f(x \mid \lambda)$
-- Gamma: $f(x \mid k, \theta)$
-- Bernoulli: $f(x \mid \theta)$
-
-<u>Closed-Form Solution:</u> Can be written explicitly in terms of known functions and operations. 
-
-<u>Numerical Method:</u> Computational technique used to approximate solutions. 
+$$
+\hat{\theta} = \argmax_{\theta} \mathcal{L}(\theta) = \argmax_{\theta} = P(HHHHT \mid \theta) = \theta^4(1-\theta) 
+$$
 
 ### Formal Definition
 
@@ -75,7 +85,26 @@ $$
 
 Note: The likelihood and log-likelihood functions have the same maximum because the log function strictly increases, but at a logarithmically slower rate than a regular linear function. 
 
+//TODO: Add a plot of the log
+
 There are cases where we can find a closed-form solution to the optimization problem, but in most cases, we must use a numerical method to find the maximum.  
+
+### Biased Coin Continued...
+
+So, going back to our biased coin example, we can find the maximum of the log-likelihood function: 
+
+$$
+\hat{\theta} = \argmax_{\theta} \ell(\theta) = \argmax_{\theta} \log(\mathcal{L}(\theta)) = \argmax_{\theta} \log(P(HHHHT \mid \theta)) 
+= \argmax_{\theta} \log(\theta^4(1-\theta) )
+= \argmax_{\theta} [4\log(\theta) + \log(1-\theta)]
+$$
+
+We then find where the gradient is 0:
+
+$$
+\nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0  \\
+\implies \hat{\theta} = \frac{4}{5}
+$$
 
 %%%
 
