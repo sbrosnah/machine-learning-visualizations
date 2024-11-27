@@ -1,6 +1,6 @@
 import MarkdownPage from "@/app/components/MarkdownPage";
 import CoinFlip from "@/app/components/mle/CoinFlip";
-import MLEVisualization from "@/app/components/mle/MLEVisualization";
+// import MLEVisualization from "@/app/components/mle/MLEVisualization";
 import { MARKDOWN_DELIMITER } from "@/lib/constants";
 import { getMarkdownContent } from '@/lib/markdown-utils';
 
