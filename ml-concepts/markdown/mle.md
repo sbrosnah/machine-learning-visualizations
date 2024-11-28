@@ -1,11 +1,11 @@
 # Maximum Likelihood Estimation (MLE)
 
-### Main Idea
+## Main Idea
 
 Maximum Likelihood Estimation (MLE) is a statisitical method that estimates the parameters of a model or distribution my maximizing the likelihood function. The 
 likelihood function is a function of the parameters where the probability of observing some fixed data given those parameters is quantified.  
 
-### Quick Review
+## Quick Review
 
 <u>Parametric Family:</u> A collection of distributions that are characterized by a common mathematical form and set of parameters, but differ based on values of those
 parameters. 
@@ -20,7 +20,7 @@ Examples of parametric families include:
 
 <u>Numerical Method:</u> Computational technique used to approximate solutions. 
 
-### Illustative Example - Biased Coin
+## Illustative Example - Biased Coin
 Assume we have a biased coin whose probability of heads is unknown. We can define a bernoulli distribution with parameter $\theta$ that models the probability of heads.  
 $$
 P(X = x) =
@@ -48,7 +48,7 @@ $$
 \hat{\theta} = \argmax_{\theta} \mathcal{L}(\theta) = \argmax_{\theta} = P(HHHHT \mid \theta) = \theta^4(1-\theta) 
 $$
 
-### Formal Definition
+## Formal Definition
 
 Parameter estimation by MLE solves problems where 
 - Given a set of observations $\{x_i\}_{i=1}^n$
@@ -85,7 +85,7 @@ Note: The likelihood and log-likelihood functions have the same maximum because 
 
 There are cases where we can find a closed-form solution to the optimization problem, but in most cases, we must use a numerical method to find the maximum.  
 
-### Biased Coin Continued...
+## Biased Coin Continued...
 
 So, going back to our biased coin example, we can find the maximum of the log-likelihood function: 
 
@@ -178,8 +178,32 @@ $$
 $$
 
 
-### Example: Gaussian Distribution
+## Example: Gaussian Distribution
 
+Given $ \{x_i\}_{i=1}^n $, i.i.d. draws from a Gaussian distribution:
+
+$$
+N(\mu, \sigma^2)
+$$
+
+The probability density function (PDF) is:
+
+$$
+P(x|\theta) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+Where $ \theta = (\mu, \sigma) $:
+- $ \mu $: Mean
+- $ \sigma^2 $: Variance
+
+**PDF Properties**
+- The exponent is scaled by $ -\frac{1}{2\sigma^2} $, to give us a positive constant factor.
+- $ \frac{1}{\sqrt{2\pi}\sigma} $ is a normalization factor ensuring the integration over the PDF equals 1:
+  $$
+  \int P(x|\theta) dx = 1
+  $$
+
+//TODO: Add a picture of the normal distribution here
 
 
 
