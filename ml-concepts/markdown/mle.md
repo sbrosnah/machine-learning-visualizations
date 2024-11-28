@@ -203,10 +203,26 @@ Where $ \theta = (\mu, \sigma) $:
   \int P(x|\theta) dx = 1
   $$
 
-//TODO: Add a picture of the normal distribution here
+%%%
 
+We estimate $\mu$ and $\sigma$ jointly by finding $\hat{\mu}$ first and then using $\hat{\mu}$ to calculate $\hat{\sigma}$.  
 
+$$
+\ell(\theta) = \sum_{i=1}^n \log p(x_i | \theta) 
+= \sum_{i=1}^n \left( \log\left(\frac{1}{(2\pi)^{1/2} \sigma}\right) - \frac{1}{2\sigma^2}(x_i - \mu)^2 \right)
+$$
 
+$$
+= \boxed{-n \log(2\pi) - n \log \sigma - \frac{1}{2\sigma^2} \sum_{i=1}^n (x_i - \mu)^2}
+$$
+
+The only part of this equation that is dependent on $\mu$ is the last part. Because of this, if we find the $\hat{\mu}$ that minimizes this term, that will be the $\hat{\mu}$ that maximizes the log-likelihood. 
+
+$$
+\hat{\mu} = \underset{\mu}{\arg\min} \sum_{i=1}^n (x_i - \mu)^2
+$$
+
+To find the optimal $\hat{\mu}$, we calculate the gradient, set it to 0, and then solve for $\hat{\mu}$.
 
 <!-- %%%
 
