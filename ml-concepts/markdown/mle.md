@@ -224,15 +224,6 @@ $$
 
 To find the optimal $\hat{\mu}$, we calculate the gradient, set it to 0, and then solve for $\hat{\mu}$.
 
-<!-- %%%
-
-### How to Use the Visualization
-
-1. **Adjust the Mean**: Use the first slider to move the center of the distribution
-2. **Change Standard Deviation**: The second slider controls the spread of the distribution
-3. **Generate New Samples**: Click the button to create a new random sample
-4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters -->
-
 ## Regression - A more complex example
 
 We are given $\{x_i, y_i\}_{i=1}^n$ i.i.d samples drawn from a Gaussian 
@@ -379,3 +370,12 @@ $$
 \mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
 = 
 $$
+
+<!-- %%%
+
+### How to Use the Visualization
+
+1. **Adjust the Mean**: Use the first slider to move the center of the distribution
+2. **Change Standard Deviation**: The second slider controls the spread of the distribution
+3. **Generate New Samples**: Click the button to create a new random sample
+4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters -->
