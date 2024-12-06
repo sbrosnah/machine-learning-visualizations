@@ -232,3 +232,150 @@ To find the optimal $\hat{\mu}$, we calculate the gradient, set it to 0, and the
 2. **Change Standard Deviation**: The second slider controls the spread of the distribution
 3. **Generate New Samples**: Click the button to create a new random sample
 4. **Observe Log-Likelihood**: Watch how the log-likelihood value changes as you adjust parameters -->
+
+## Regression - A more complex example
+
+We are given $\{x_i, y_i\}_{i=1}^n$ i.i.d samples drawn from a Gaussian 
+
+$$
+P(y|x;\theta,\sigma)\sim\mathcal{N}(f(x; \theta), \sigma^2)
+$$
+Where $f$ is some function that estimates the mean and is parameterized by $\theta$.
+
+Now, we must estimate $\theta$ and $\sigma$
+
+### Why does it make sense to model the regression task this way? 
+//todo: insert pic here
+
+
+We solve this by maximizing the conditional likelihood $P(y|x;\theta,\sigma^2)$ instead of the marginal likelihood.
+
+$$
+\ell(\theta, \sigma) = \sum_{i=1}^nlog(P(y_i|x_i;\theta,\sigma))=  \\\sum_{i=1}^n\left[-\frac{1}{2}log(2\pi)-log(\sigma^2)-\frac{1}{2\sigma^2}(y_i-f(x_i,\theta))^2\right] \\
+= -\frac{n}{2}log(2\pi)-n\log(\sigma^2)-\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\theta))^2
+$$
+
+If we want the maximize the the likelihood function above with respect to $\theta$, notice that the only term in the summation that is dependent on $\theta$ is the last. Also, notice that the last term is negated, so if we want to maximize the log-likelihood, we should minimize this term. This means our optimization for $\theta$ reduces to:
+
+$$
+\argmax_{\theta}\ell(\theta, \sigma) \rightarrow \hat{\theta} = \argmin_{\theta}\sum_{i=1}^n(y_i-f(x_i,\theta))^2
+$$
+
+This is the Mean Squared Error (MSE). This is another explanation for why MSE is used for coefficient estimation in regression tasks.
+
+To estimate $\sigma$, we just need to observe the terms in the log-likelihood that depend on $\sigma$ and use those in a simplified optimization function. The second and third terms depend on $\sigma$ and are negated so our optimization function becomes (We will find the optimal $\sigma^2$ for simplicity's sake: 
+
+$$
+\argmax_{\sigma^2}\ell(\hat{\theta}, \sigma) \rightarrow \hat{\sigma}^2=\argmin_{\sigma^2}\left[n\log(\sigma^2)+\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\hat{\theta}))^2\right] \\
+= \frac{1}{n}\sum_{i=1}^n\left(y_i - f(x_i, \hat{\theta})\right)^2
+$$
+This is the average square loss. 
+
+Just like we can use MLE in regression to predict continuous labels, we can also use MLE for classification via logistic regression. 
+
+## Example: MLE For Logistic Regression
+
+We are given $\{x_i, y_i\}_{i=1}^n$ where $y_i \in \{0, 1\}, s.t.$
+$$
+P(y|x;\theta) = \frac{\exp(yf(x,\theta))}{1 + \exp(f(x,\theta))}
+$$
+
+Estimate $\theta$.
+$$
+P(y=0|x;\theta) = \frac{1}{1 + \exp(f(x,\theta))}
+$$
+
+$$
+P(y=1|x;\theta) = \frac{\exp(f(x,\theta))}{1 + \exp(f(x,\theta))}
+$$
+
+$$
+\ell(\theta)=\sum_{i=1}^nlogP(y_i|x_i, \theta)=\sum_{i=1}^n\left[y_if(x_i, \theta)-\log(1+\exp(f(x_i, \theta)))\right]
+$$
+
+It is impossible to come up with a closed form solution for this, so we need to resort to numerical methods like gradient descent. 
+
+## Evaluation Metrics and MLE
+The Maximum Likelihood Estimator is a random variable as a function of the random data as noted below.
+$$
+\hat{\theta}=\hat{\theta}(x_1, x_2,\ldots,x_n)
+$$
+Where the samples are identically and independently distributed from the true distribution
+$$
+\{x_i\} \sim \rho(\cdot \mid \theta^*)
+$$
+
+Because $\hat{\theta}$ is a RV, we can try to understand its statistical behavior, which relates to the analysis of evaluation metrics like bias, variance, and mean squared error (MSE). 
+
+<u>Bias</u>: Difference of expectation of MLE and the true parameter
+
+$$
+Bias(\hat{\theta}) = \mathbb{E}\left[\hat{\theta}(x_1, x_2,\ldots,x_n)\right] - \theta^* = \int_{-\infty}^\infty \hat{\theta}(x_1, x_2,\ldots,x_n)\prod_{i=1}^nP(x_i \mid \theta^*) \, dx - \theta^*
+$$
+
+If you don't understand the above equation, recall the definition of expectation: 
+
+$$
+\mathbb{E}[g(x)] = \int_{-\infty}^{\infty} g(x) f_x(x) \, dx
+$$
+Where 
+- $g(x)$ is a function of R.V. $X$. In our case this is $\hat{\theta}(x_1, x_2,\ldots,x_n)$
+- $f_x(x)$ is the PDF of the R.V. $X$.
+
+In simple cases, we have solutions for the bias, but we don't for more complicated ones. 
+
+<u>Variance</u>: The expected distance squared of the estimator from it's expected value. i.e. It measures the spread of the estimator $\hat{\theta}$ around its expected value. 
+ - It helps to quantify how much $\hat{\theta}$ varies across different samples of data. 
+$$
+Var(\hat{\theta}) = \mathbb{E}_{\theta^*}\left[(\hat{\theta}(x_1, x_2,\ldots,x_n) - \mathbb{E}_{\theta^*}\left[\hat{\theta}(x_1, x_2,\ldots,x_n)\right])^2\right]
+$$
+Which means
+$$
+Var(\text{R.V.}) = \text{Expectation}\left[\text{R.V.} - \text{Expectation of R.V}\right]
+$$
+
+Bias vs. Variance:
+- Bias measures the difference between the mean and the true parameter.
+- Variance measures the fluctuation around the mean.
+- We want both to be small. 
+
+//TODO: Add images here
+
+<u>Mean Squared Error (MSE)</u>: the expected distance squared of the estimator from its true value. 
+- This is almost the same as variance. The only difference is that the expectation of the estimator $\hat{\theta}$ is replaced with the true parameter $\theta^*$.
+- The MSE measures both the bias and the variance. Because we want both the bias and the variance to be small, we also want the MSE to be small. 
+
+MSE Equation:
+$$
+\text{MSE}(\hat{\theta}) = \mathbb{E}_{\theta^*} \left[ \left( \hat{\theta}(X_1, \ldots, X_n) - \theta^* \right)^2 \right]
+$$
+Bias-Variance Decomposition of MSE:
+$$
+\text{MSE}(\hat{\theta}) = \left(\text{Bias}(\hat{\theta})\right)^2 + \text{Var}(\hat{\theta})
+$$
+Proof of Bias-Variance Decomposition:
+1. Start with the simplified definition of MSE
+$$
+\text{MSE}(\hat{\theta}) = \mathbb{E}\left[ \left( \hat{\theta} - \theta^* \right)^2 \right]
+$$
+2. Subtract and add the expectation of the parameter (The same as adding 0).
+$$
+\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) + \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 \right]
+$$
+3. Expand the polynomial and distribute the expectation.
+$$
+\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2 + \left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 + 2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]\\
+=\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2\right] + \mathbb{E}\left[\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2\right] + \mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
+$$
+- Notice that the first term is our the $\text{Var}(\hat{\theta})$ and the second term is $\text{Bias}(\hat{\theta})^2$. 
+
+Thus, we can change our equation to
+$$
+=\text{Var}(\hat{\theta}) +\text{Bias}(\hat{\theta})^2 + \mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
+$$
+
+4. The last thing we need to do is simplify the final term
+$$
+\mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
+= 
+$$
