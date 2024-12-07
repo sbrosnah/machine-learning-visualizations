@@ -6,19 +6,19 @@ export default function Home() {
       title: "Maximum Likelihood Estimation",
       description: "Visualize how MLE finds optimal parameters for probability distributions.",
       route: "/mle",
-      difficulty: "Intermediate"
+      tags: ["Theory", "Interactive"]
     },
-    {
-      title: "K-Means Clustering",
-      description: "Interactive clustering visualization with adjustable parameters.",
-      route: "/k-means",
-      difficulty: "Beginner"
-    },
+    // {
+    //   title: "K-Means Clustering",
+    //   description: "Interactive clustering visualization with adjustable parameters.",
+    //   route: "/k-means",
+    //   tags: "Beginner"
+    // },
     {
       title: "Bayesian Inference",
       description: "Visualize how Bayesian inference updates probability distributions based on data.",
       route: "/bayesian-inference",
-      difficulty: "Advanced"
+      tags: ["Theory"]
     }
   ]
   return (
