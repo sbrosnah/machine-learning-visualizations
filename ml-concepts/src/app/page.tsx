@@ -26,7 +26,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">Spencer&apos;s Blog Posts</h1>
         <p className="text-gray-600 mb-8">
-          Click on a cart below to explore math and machine learning concepts with visualizations, tutorials, and more!</p>
+          Click on a card below to explore math and machine learning concepts with visualizations, tutorials, and more!</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {algorithms.map((algo) => (
             <AlgorithmCard key={algo.route} {...algo} />
