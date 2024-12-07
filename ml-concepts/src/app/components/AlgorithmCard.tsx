@@ -28,8 +28,8 @@ export default function AlgorithmCard({ title, description, route, tags }: Algor
           </div>
           <CardDescription className="mt-2">{description}</CardDescription>
           <div className="flex items-end">
-            {tags.map((tag) => (
-              <span className={`px-2 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
+            {tags.map((tag, index) => (
+              <span key={index} className={`px-2 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
                 {tag}
               </span>
             ))}
