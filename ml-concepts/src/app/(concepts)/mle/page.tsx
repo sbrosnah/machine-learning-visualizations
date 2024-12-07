@@ -20,6 +20,10 @@ export default async function MLEPage() {
             <MarkdownPage content={chunks[2]}/> 
             <Image className="max-w-5xl mx-auto px-4 py-8" src="/images/normal-pdf.png" alt="Gaussian Plot" width={700} height={500}/>
             <MarkdownPage content={chunks[3]}/> 
+            <Image className="max-w-5xl mx-auto px-4 py-8" src="/images/jensen's-inequality.png" alt="Gaussian Plot" width={700} height={500}/>
+            <MarkdownPage content={chunks[4]}/> 
+            <Image className="max-w-5xl mx-auto px-4 py-8" src="/images/negated-log.png" alt="Gaussian Plot" width={700} height={500}/>
+            <MarkdownPage content={chunks[5]}/> 
         </>
     );
 }
