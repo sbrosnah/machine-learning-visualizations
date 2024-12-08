@@ -1,4 +1,4 @@
-import AlgorithmCard from "./components/AlgorithmCard";
+import BlogPostCard from "./components/BlogPostCard";
 
 export default function Home() {
   const algorithms = [
@@ -6,14 +6,8 @@ export default function Home() {
       title: "Maximum Likelihood Estimation",
       description: "Visualize how MLE finds optimal parameters for probability distributions.",
       route: "/mle",
-      tags: ["Theory", "Interactive", "Machine Learning"]
+      tags: ["Theory", "Machine Learning"]
     },
-    // {
-    //   title: "K-Means Clustering",
-    //   description: "Interactive clustering visualization with adjustable parameters.",
-    //   route: "/k-means",
-    //   tags: "Beginner"
-    // },
     {
       title: "Bayesian Inference",
       description: "Visualize how Bayesian inference updates probability distributions based on data.",
@@ -29,7 +23,7 @@ export default function Home() {
           Click on a card below to explore math and machine learning concepts with visualizations, tutorials, and more!</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {algorithms.map((algo) => (
-            <AlgorithmCard key={algo.route} {...algo} />
+            <BlogPostCard key={algo.route} {...algo} />
           ))}
         </div>
       </div>

@@ -1,23 +1,14 @@
 import { Card, CardHeader, CardTitle, CardDescription } from "@/app/components/card"
 import Link from "next/link"
 
-export interface AlgorithmCardProps {
+export interface BlogPostCardProps {
   title: string
   description: string
   route: string
   tags: string[]
 }
 
-export default function AlgorithmCard({ title, description, route, tags }: AlgorithmCardProps) {
-
-  const getTagColor = (level: string) => {
-    switch(level.toLowerCase()) {
-      case 'theory': return 'bg-green-100 text-green-800'
-      case 'interactive': return 'bg-yellow-100 text-yellow-800'
-      case 'machine learning': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
-    }
-  }
+export default function BlogPostCard({ title, description, route, tags }: BlogPostCardProps) {
 
   return (
     <Link href={route} className="block transition-transform hover:scale-105">
@@ -27,9 +18,9 @@ export default function AlgorithmCard({ title, description, route, tags }: Algor
             <CardTitle className="text-xl font-bold">{title}</CardTitle>
           </div>
           <CardDescription className="mt-2">{description}</CardDescription>
-          <div className="flex items-end">
+          <div className="flex items-end flex-wrap">
             {tags.map((tag, index) => (
-              <span key={index} className={`px-2 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
+              <span key={index} className={`mt-1 mr-1 px-2 py-1 rounded-full text-sm bg-gray-300 text-gray-800 text-nowrap`}>
                 {tag}
               </span>
             ))}
