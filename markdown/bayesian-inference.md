@@ -1,5 +1,9 @@
 # Bayesian Inference
 
+Visualization coming soon...
+
+## Theory
+
 ### Main Idea
 Bayesian Inference is a statistical method that updates the probability of a hypothesis as more evidence becomes available.
 
@@ -227,8 +231,9 @@ We know
 
 $$
 \mu_p = \frac{B}{A} = \frac{[\sum_{i=1}^n\frac{x_i}{\sigma_1^2}] + \frac{\mu_0}{\sigma_0^2}}
-{\frac{n}{\sigma_1^2}+\frac{1}{\sigma_0^2}}\\
-
+{\frac{n}{\sigma_1^2}+\frac{1}{\sigma_0^2}}
+$$
+$$
 \sigma_p^2=\frac{1}{A}=(\frac{n}{\sigma_1^2} + \frac{1}{\sigma_0^2})^{-1}
 $$
 
@@ -244,8 +249,9 @@ $$
 Next, consider when $n$ is really large.
 $$
 \mu_p = \frac{[\sum_{i=1}^n\frac{x_i}{\sigma_1^2}] + \frac{\mu_0}{\sigma_0^2}}
-{\frac{n}{\sigma_1^2}+\frac{1}{\sigma_0^2}} \approx \frac{[\sum_{i=1}^nx_i] + 0}{n} = \text{Empirical Mean}\\
-
+{\frac{n}{\sigma_1^2}+\frac{1}{\sigma_0^2}} \approx \frac{[\sum_{i=1}^nx_i] + 0}{n} = \text{Empirical Mean}
+$$
+$$
 \sigma_p^2=(\frac{n}{\sigma_1^2} + \frac{1}{\sigma_0^2})^{-1} \approx (\frac{n}{\sigma_1^2})^{-1} \approx \frac{1}{n}
 $$
 

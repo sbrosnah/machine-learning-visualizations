@@ -115,7 +115,9 @@ $$
 We then find where the gradient is 0:
 
 $$
-\nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0  \\
+\nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0
+$$
+$$
 \implies \hat{\theta} = \frac{4}{5}
 $$
 
@@ -158,9 +160,13 @@ Also notice that this is a valid probability distribution because both $P(X=1)$ 
 Now, let's try to estimate $w$. 
 
 $$
-\ell(\theta) = \sum_{i=1}^n \log(P(x_i \mid \theta)) \\
+\ell(\theta) = \sum_{i=1}^n \log(P(x_i \mid \theta)) 
+$$
+$$
 = \sum_{i=1}^n \left[ x_i w - \log\left(1 + \exp(w)\right) \right]
-= \left( \sum_{i=1}^n x_i \right) w - n \log\left(1 + \exp(w)\right)\\
+= \left( \sum_{i=1}^n x_i \right) w - n \log\left(1 + \exp(w)\right)
+$$
+$$
 = n \left( \bar{x}w - \log\left(1 + \exp(w)\right) \right)
 $$
 
@@ -169,7 +175,9 @@ Where $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$
 Now that we have the log-likelihood function, we calculate the gradient, set it to 0, and then solve for $\hat{w}$. 
 
 $$
-\nabla \ell(\hat{w}) = n \left( \bar{x}\hat{w} - \log\left(1 + \exp(\hat{w})\right) \right) = 0 \\
+\nabla \ell(\hat{w}) = n \left( \bar{x}\hat{w} - \log\left(1 + \exp(\hat{w})\right) \right) = 0 
+$$
+$$
 \implies \hat{w} = \log\left(\frac{\bar{x}}{1 - \bar{x}}\right)
 $$
 
@@ -244,7 +252,12 @@ Now, we must estimate $\theta$ and $\sigma$
 We solve this by maximizing the conditional likelihood $P(y|x;\theta,\sigma^2)$ instead of the marginal likelihood.
 
 $$
-\ell(\theta, \sigma) = \sum_{i=1}^nlog(P(y_i|x_i;\theta,\sigma))=  \\\sum_{i=1}^n\left[-\frac{1}{2}log(2\pi)-log(\sigma^2)-\frac{1}{2\sigma^2}(y_i-f(x_i,\theta))^2\right] \\
+\ell(\theta, \sigma) = \sum_{i=1}^nlog(P(y_i|x_i;\theta,\sigma))
+$$
+$$
+= \sum_{i=1}^n\left[-\frac{1}{2}log(2\pi)-log(\sigma^2)-\frac{1}{2\sigma^2}(y_i-f(x_i,\theta))^2\right] 
+$$
+$$
 = -\frac{n}{2}log(2\pi)-n\log(\sigma^2)-\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\theta))^2
 $$
 
@@ -259,7 +272,9 @@ This is the Mean Squared Error (MSE). This is another explanation for why MSE is
 To estimate $\sigma$, we just need to observe the terms in the log-likelihood that depend on $\sigma$ and use those in a simplified optimization function. The second and third terms depend on $\sigma$ and are negated so our optimization function becomes (We will find the optimal $\sigma^2$ for simplicity's sake: 
 
 $$
-\argmax_{\sigma^2}\ell(\hat{\theta}, \sigma) \rightarrow \hat{\sigma}^2=\argmin_{\sigma^2}\left[n\log(\sigma^2)+\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\hat{\theta}))^2\right] \\
+\argmax_{\sigma^2}\ell(\hat{\theta}, \sigma) \rightarrow \hat{\sigma}^2=\argmin_{\sigma^2}\left[n\log(\sigma^2)+\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\hat{\theta}))^2\right] 
+$$
+$$
 = \frac{1}{n}\sum_{i=1}^n\left(y_i - f(x_i, \hat{\theta})\right)^2
 $$
 This is the average square loss. 
@@ -363,7 +378,9 @@ $$
 $$
 1. Expand the polynomial and distribute the expectation.
 $$
-\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2 + \left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 + 2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]\\
+\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2 + \left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 + 2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
+$$
+$$
 =\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2\right] + \mathbb{E}\left[\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2\right] + \mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
 $$
 - Notice that the first term is our the $\text{Var}(\hat{\theta})$ and the second term inside the expectation is $\text{Bias}(\hat{\theta})^2$. We can move the $\text{Bias}(\hat{\theta})^2$ outside of the expectation because it is a constant (It doesn't directly depend on $\hat{\theta}$).
@@ -383,7 +400,9 @@ $$
 $$
 - The expectation can be distributed. The expectation of the expectation is just the expectation. 
 $$
-2\left( \mathbb{E}(\hat{\theta}) - \mathbb{E}(\hat{\theta}) \right)\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)\\
+2\left( \mathbb{E}(\hat{\theta}) - \mathbb{E}(\hat{\theta}) \right)\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)
+$$
+$$
 =2 \cdot 0 \cdot \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) = \boxed{0}
 $$
 
@@ -424,9 +443,13 @@ $$
 \text{Var}(\hat{\mu}) 
 = \mathbb{E}\bigl[(\hat{\mu} - \mu)^2\bigr]
 = \mathbb{E}\left[\left(\frac{1}{n}\sum_{i=1}^n x_i - \mu\right)^2\right]
-= \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n (x_i - \mu)\right)^2\right]\\
+= \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n (x_i - \mu)\right)^2\right]
+$$
+$$
 = \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n 
-(x_i - \mu)^2+ \sum_{\substack{i,j=1 \\ i \neq j}}^n (x_i - \mu)(x_j - \mu)\right)\right] \\
+(x_i - \mu)^2+ \sum_{\substack{i,j=1 \\ i \neq j}}^n (x_i - \mu)(x_j - \mu)\right)\right] 
+$$
+$$
 = \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2]
 \;+\; \frac{1}{n^2} \sum_{\substack{i,j=1 \\ i \neq j}}^n \mathbb{E}[(x_i - \mu)(x_j - \mu)].
 $$
@@ -439,7 +462,9 @@ $$
 
 We can sumplify the equation above further
 $$
-= \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2] + 0\\
+= \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2] + 0
+$$
+$$
 = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}
 $$
 
@@ -516,7 +541,9 @@ $$
 Now we can apply Jensen's Inequality.
 
 $$
-\mathbb{E}_q\left[-\log\left(\frac{p(x)}{q(x)}\right)\right] \geq -\log\left(\mathbb{E}_q\left[\frac{p(x)}{q(x)}\right]\right)\\
+\mathbb{E}_q\left[-\log\left(\frac{p(x)}{q(x)}\right)\right] \geq -\log\left(\mathbb{E}_q\left[\frac{p(x)}{q(x)}\right]\right)
+$$
+$$
 = -\log(\sum_xp(x)) = -\log(1) = \boxed{0}
 $$
 
