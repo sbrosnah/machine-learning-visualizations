@@ -5,15 +5,16 @@ export interface AlgorithmCardProps {
   title: string
   description: string
   route: string
-  difficulty: string
+  tags: string[]
 }
 
-export default function AlgorithmCard({ title, description, route, difficulty }: AlgorithmCardProps) {
-  const getDifficultyColor = (level: string) => {
+export default function AlgorithmCard({ title, description, route, tags }: AlgorithmCardProps) {
+
+  const getTagColor = (level: string) => {
     switch(level.toLowerCase()) {
-      case 'beginner': return 'bg-green-100 text-green-800'
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800'
-      case 'advanced': return 'bg-red-100 text-red-800'
+      case 'theory': return 'bg-green-100 text-green-800'
+      case 'interactive': return 'bg-yellow-100 text-yellow-800'
+      case 'machine learning': return 'bg-red-100 text-red-800'
       default: return 'bg-gray-100 text-gray-800'
     }
   }
@@ -24,11 +25,15 @@ export default function AlgorithmCard({ title, description, route, difficulty }:
         <CardHeader>
           <div className="flex justify-between items-start">
             <CardTitle className="text-xl font-bold">{title}</CardTitle>
-            <span className={`px-2 py-1 rounded-full text-sm ${getDifficultyColor(difficulty)}`}>
-              {difficulty}
-            </span>
           </div>
           <CardDescription className="mt-2">{description}</CardDescription>
+          <div className="flex items-end">
+            {tags.map((tag, index) => (
+              <span key={index} className={`px-2 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
+                {tag}
+              </span>
+            ))}
+          </div>
         </CardHeader>
       </Card>
     </Link>
