@@ -147,7 +147,7 @@ export default function CoinFlip() {
                 <Button 
                     //This is how events are handled. Functions aren't executed directly. Instead the functions are passed in and will be called when the event occurs.
                     onClick={flipCoin}
-                    className="w-28"
+                    className="w-28 mr-3"
                 >
                     Flip Coin
                 </Button>

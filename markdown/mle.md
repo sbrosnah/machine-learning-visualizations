@@ -1,12 +1,28 @@
 # Maximum Likelihood Estimation (MLE)
 
+%%%
 
-## Main Idea
+#### How to Use the Visualization
+
+1. **Adjust $\theta^*$ (the true parameter)**: Use the slider to change the parameter.
+2. **Generate Samples**: Click the button to simulate coin flips.
+3. **Observe Likelihood and Log-Likelihood**: Watch how plots change as you adjust the parameters and generate more samples.
+4. **Observe the estimated parameter at the top ($\hat{\theta}$)**: This is the x value where the max log-likelihood and max likelihood values occur.
+
+**Things to Note**
+
+- The scale on the y-axis of the likelihood plot gets extremely small as the number of samples increases. 
+- The likelihood plot moves around a lot more than the log-likelihood plot.
+- The maximum occurs at the same place in both plots leading to the same parameter estimate.
+
+## Theory
+
+### Main Idea
 
 Maximum Likelihood Estimation (MLE) is a statisitical method that estimates the parameters of a model or distribution my maximizing the likelihood function. The 
 likelihood function is a function of the parameters where the probability of observing some fixed data given those parameters is quantified.  
 
-## Quick Review
+### Quick Review
 
 <u>Parametric Family:</u> A collection of distributions that are characterized by a common mathematical form and set of parameters, but differ based on values of those
 parameters. 
@@ -21,7 +37,7 @@ Examples of parametric families include:
 
 <u>Numerical Method:</u> Computational technique used to approximate solutions. 
 
-## Illustative Example - Biased Coin
+### Illustative Example - Biased Coin
 Assume we have a biased coin whose probability of heads is unknown. We can define a bernoulli distribution with parameter $\theta$ that models the probability of heads.  
 $$
 P(X = x) =
@@ -49,7 +65,7 @@ $$
 \hat{\theta} = \argmax_{\theta} \mathcal{L}(\theta) = \argmax_{\theta} = P(HHHHT \mid \theta) = \theta^4(1-\theta) 
 $$
 
-## Formal Definition
+### Formal Definition
 
 Parameter estimation by MLE solves problems where 
 - Given a set of observations $\{x_i\}_{i=1}^n$
@@ -86,7 +102,7 @@ Note: The likelihood and log-likelihood functions have the same maximum because 
 
 There are cases where we can find a closed-form solution to the optimization problem, but in most cases, we must use a numerical method to find the maximum.  
 
-## Biased Coin Continued...
+### Biased Coin Continued...
 
 So, going back to our biased coin example, we can find the maximum of the log-likelihood function: 
 
@@ -99,26 +115,13 @@ $$
 We then find where the gradient is 0:
 
 $$
-\nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0  \\
+\nabla \ell(\theta) = \frac{4}{\theta} - \frac{1}{1-\theta} = 0
+$$
+$$
 \implies \hat{\theta} = \frac{4}{5}
 $$
 
-%%%
-
-### How to Use the Visualization
-
-1. **Adjust $\theta^*$ (the true parameter)**: Use the slider to change the parameter.
-2. **Generate Samples**: Click the button to simulate coin flips.
-3. **Observe Likelihood and Log-Likelihood**: Watch how plots change as you adjust the parameters and generate more samples.
-4. **Observe the estimated parameter at the top ($\hat{\theta}$)**: This is the x value where the max log-likelihood and max likelihood values occur.
-
-**Things to Note**
-
-- The scale on the y-axis of the likelihood plot gets extremely small as the number of samples increases. 
-- The likelihood plot moves around a lot more than the log-likelihood plot.
-- The maximum occurs at the same place in both plots leading to the same parameter estimate.
-
-### Log-Odds
+#### Log-Odds
 
 Using MLE to estimate the parameters for problems with closed-form solutions like this works fine, but we can loosen the constraints of our optimization problem by estimating something called the log-odds instead. 
 
@@ -157,9 +160,13 @@ Also notice that this is a valid probability distribution because both $P(X=1)$ 
 Now, let's try to estimate $w$. 
 
 $$
-\ell(\theta) = \sum_{i=1}^n \log(P(x_i \mid \theta)) \\
+\ell(\theta) = \sum_{i=1}^n \log(P(x_i \mid \theta)) 
+$$
+$$
 = \sum_{i=1}^n \left[ x_i w - \log\left(1 + \exp(w)\right) \right]
-= \left( \sum_{i=1}^n x_i \right) w - n \log\left(1 + \exp(w)\right)\\
+= \left( \sum_{i=1}^n x_i \right) w - n \log\left(1 + \exp(w)\right)
+$$
+$$
 = n \left( \bar{x}w - \log\left(1 + \exp(w)\right) \right)
 $$
 
@@ -168,7 +175,9 @@ Where $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$
 Now that we have the log-likelihood function, we calculate the gradient, set it to 0, and then solve for $\hat{w}$. 
 
 $$
-\nabla \ell(\hat{w}) = n \left( \bar{x}\hat{w} - \log\left(1 + \exp(\hat{w})\right) \right) = 0 \\
+\nabla \ell(\hat{w}) = n \left( \bar{x}\hat{w} - \log\left(1 + \exp(\hat{w})\right) \right) = 0 
+$$
+$$
 \implies \hat{w} = \log\left(\frac{\bar{x}}{1 - \bar{x}}\right)
 $$
 
@@ -179,7 +188,7 @@ $$
 $$
 
 
-## Example - MLE for a Gaussian Distribution
+### Example - MLE for a Gaussian Distribution
 
 Given $ \{x_i\}_{i=1}^n $, i.i.d. draws from a Gaussian distribution:
 
@@ -225,7 +234,7 @@ $$
 
 To find the optimal $\hat{\mu}$, we calculate the gradient, set it to 0, and then solve for $\hat{\mu}$.
 
-## Example - MLE in Regression
+### Example - MLE in Regression
 
 We are given $\{x_i, y_i\}_{i=1}^n$ i.i.d samples drawn from a Gaussian 
 
@@ -236,14 +245,19 @@ Where $f$ is some function that estimates the mean and is parameterized by $\the
 
 Now, we must estimate $\theta$ and $\sigma$
 
-### Why does it make sense to model the regression task this way? 
+#### Why does it make sense to model the regression task this way? 
 //todo: insert pic here
 
 
 We solve this by maximizing the conditional likelihood $P(y|x;\theta,\sigma^2)$ instead of the marginal likelihood.
 
 $$
-\ell(\theta, \sigma) = \sum_{i=1}^nlog(P(y_i|x_i;\theta,\sigma))=  \\\sum_{i=1}^n\left[-\frac{1}{2}log(2\pi)-log(\sigma^2)-\frac{1}{2\sigma^2}(y_i-f(x_i,\theta))^2\right] \\
+\ell(\theta, \sigma) = \sum_{i=1}^nlog(P(y_i|x_i;\theta,\sigma))
+$$
+$$
+= \sum_{i=1}^n\left[-\frac{1}{2}log(2\pi)-log(\sigma^2)-\frac{1}{2\sigma^2}(y_i-f(x_i,\theta))^2\right] 
+$$
+$$
 = -\frac{n}{2}log(2\pi)-n\log(\sigma^2)-\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\theta))^2
 $$
 
@@ -258,14 +272,16 @@ This is the Mean Squared Error (MSE). This is another explanation for why MSE is
 To estimate $\sigma$, we just need to observe the terms in the log-likelihood that depend on $\sigma$ and use those in a simplified optimization function. The second and third terms depend on $\sigma$ and are negated so our optimization function becomes (We will find the optimal $\sigma^2$ for simplicity's sake: 
 
 $$
-\argmax_{\sigma^2}\ell(\hat{\theta}, \sigma) \rightarrow \hat{\sigma}^2=\argmin_{\sigma^2}\left[n\log(\sigma^2)+\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\hat{\theta}))^2\right] \\
+\argmax_{\sigma^2}\ell(\hat{\theta}, \sigma) \rightarrow \hat{\sigma}^2=\argmin_{\sigma^2}\left[n\log(\sigma^2)+\frac{n}{2\sigma^2}\sum_{i=1}^n(y_i-f(x_i,\hat{\theta}))^2\right] 
+$$
+$$
 = \frac{1}{n}\sum_{i=1}^n\left(y_i - f(x_i, \hat{\theta})\right)^2
 $$
 This is the average square loss. 
 
 Just like we can use MLE in regression to predict continuous labels, we can also use MLE for classification via logistic regression. 
 
-## Example - MLE For Logistic Regression
+### Example - MLE For Logistic Regression
 
 We are given $\{x_i, y_i\}_{i=1}^n$ where $y_i \in \{0, 1\}, s.t.$
 $$
@@ -287,7 +303,7 @@ $$
 
 It is impossible to come up with a closed form solution for this, so we need to resort to numerical methods like gradient descent. 
 
-## Evaluation Metrics and MLE
+### Evaluation Metrics and MLE
 The Maximum Likelihood Estimator is a random variable as a function of the random data as noted below.
 $$
 \hat{\theta}=\hat{\theta}(x_1, x_2,\ldots,x_n)
@@ -362,7 +378,9 @@ $$
 $$
 1. Expand the polynomial and distribute the expectation.
 $$
-\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2 + \left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 + 2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]\\
+\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2 + \left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2 + 2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
+$$
+$$
 =\mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right)^2\right] + \mathbb{E}\left[\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)^2\right] + \mathbb{E}\left[2 \left( \hat{\theta} - \mathbb{E}(\hat{\theta}) \right) \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) \right]
 $$
 - Notice that the first term is our the $\text{Var}(\hat{\theta})$ and the second term inside the expectation is $\text{Bias}(\hat{\theta})^2$. We can move the $\text{Bias}(\hat{\theta})^2$ outside of the expectation because it is a constant (It doesn't directly depend on $\hat{\theta}$).
@@ -382,7 +400,9 @@ $$
 $$
 - The expectation can be distributed. The expectation of the expectation is just the expectation. 
 $$
-2\left( \mathbb{E}(\hat{\theta}) - \mathbb{E}(\hat{\theta}) \right)\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)\\
+2\left( \mathbb{E}(\hat{\theta}) - \mathbb{E}(\hat{\theta}) \right)\left( \mathbb{E}(\hat{\theta}) - \theta^* \right)
+$$
+$$
 =2 \cdot 0 \cdot \left( \mathbb{E}(\hat{\theta}) - \theta^* \right) = \boxed{0}
 $$
 
@@ -404,7 +424,7 @@ If $\text{Bias}(\hat{\theta}) \rightarrow 0 \text{ as } n \rightarrow \infty$ ou
 - consistent $\rightarrow$ asymtotic bias
 - unbiased $\rightarrow$ asymtotic bias
 
-### Example - Calculating MLE Evaluation Metrics For a Gaussian
+#### Example - Calculating MLE Evaluation Metrics For a Gaussian
 For $\{x_i\}_{i=1}^n \sim \mathcal{N}(\mu, \sigma^2)$, MLE is 
 $$
 \hat{\mu} = \frac{1}{n}\sum_{i=1}^nx_i, \quad \hat{\sigma^2}=\frac{1}{n}\sum_{i=1}^n(x_i-\hat{\mu})^2
@@ -423,9 +443,13 @@ $$
 \text{Var}(\hat{\mu}) 
 = \mathbb{E}\bigl[(\hat{\mu} - \mu)^2\bigr]
 = \mathbb{E}\left[\left(\frac{1}{n}\sum_{i=1}^n x_i - \mu\right)^2\right]
-= \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n (x_i - \mu)\right)^2\right]\\
+= \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n (x_i - \mu)\right)^2\right]
+$$
+$$
 = \mathbb{E}\left[\frac{1}{n^2}\left(\sum_{i=1}^n 
-(x_i - \mu)^2+ \sum_{\substack{i,j=1 \\ i \neq j}}^n (x_i - \mu)(x_j - \mu)\right)\right] \\
+(x_i - \mu)^2+ \sum_{\substack{i,j=1 \\ i \neq j}}^n (x_i - \mu)(x_j - \mu)\right)\right] 
+$$
+$$
 = \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2]
 \;+\; \frac{1}{n^2} \sum_{\substack{i,j=1 \\ i \neq j}}^n \mathbb{E}[(x_i - \mu)(x_j - \mu)].
 $$
@@ -438,7 +462,9 @@ $$
 
 We can sumplify the equation above further
 $$
-= \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2] + 0\\
+= \frac{1}{n^2} \sum_{i=1}^n \mathbb{E}[(x_i - \mu)^2] + 0
+$$
+$$
 = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}
 $$
 
@@ -459,7 +485,7 @@ $$
 $$
 Which is <u>unbiased</u>.
 
-### Consistent Consistency in MLE
+#### Consistent Consistency in MLE
 One thing to note is that Maximum Likelihood Estimation is almost always consistent. Why? 
 
 The short answer is that the distribution of the observations becomes more and more similar to population distribution. 
@@ -515,7 +541,9 @@ $$
 Now we can apply Jensen's Inequality.
 
 $$
-\mathbb{E}_q\left[-\log\left(\frac{p(x)}{q(x)}\right)\right] \geq -\log\left(\mathbb{E}_q\left[\frac{p(x)}{q(x)}\right]\right)\\
+\mathbb{E}_q\left[-\log\left(\frac{p(x)}{q(x)}\right)\right] \geq -\log\left(\mathbb{E}_q\left[\frac{p(x)}{q(x)}\right]\right)
+$$
+$$
 = -\log(\sum_xp(x)) = -\log(1) = \boxed{0}
 $$
 
@@ -565,7 +593,7 @@ $$
 
 Maximizing the average log-likelihood is the same thing as maximizing the MLE. 
 
-## Conclusion
+### Conclusion
 
 Maximum Likelihood Estimation (MLE) is a powerful and foundational statistical method for parameter estimation. By leveraging the principle of maximizing the likelihood function, MLE provides a systematic approach to infer the parameters of a model based on observed data. Its versatility is evident as it is applicable to a wide range of parametric families, from simple cases like a biased coin to more complex scenarios such as regression tasks or Gaussian distributions.
 
@@ -577,12 +605,12 @@ Throughout this blog post, we explored key aspects of MLE:
 4. **Log-Odds and Numerical Methods**: The flexibility of working with log-odds and the necessity of numerical solutions for complex models.
 5. **Consistency of MLE**: Demonstrating the nearly universal consistency of MLE, supported by a rigorous connection to Kullback-Leibler (KL) divergence.
 
-### Takeaways:
+#### Takeaways:
 - MLE is intuitive and adaptable, making it a go-to method for parameter estimation across various domains.
 - Despite its power, MLE is not without limitations. It assumes that the chosen model accurately represents the underlying data distribution, and it can be sensitive to outliers or model misspecification.
 - The bias-variance tradeoff and consistency properties highlight the importance of understanding the behavior of MLE estimators, especially as sample sizes grow.
 
-### Practical Implications:
+#### Practical Implications:
 Whether you're building predictive models, designing experiments, or analyzing data, MLE provides a strong statistical foundation. Its principles extend beyond traditional parametric models and are central to many machine learning algorithms.
 
 By mastering MLE, you unlock a tool that combines theoretical rigor with practical applicability, empowering you to tackle a wide array of problems with confidence.

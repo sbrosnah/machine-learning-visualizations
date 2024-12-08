@@ -6,7 +6,7 @@ export default function ConceptLayout({ children }: { children: React.ReactNode 
             <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
                 <div className="max-w-6xl mx-auto px-4 py-4">
                 <Link href="/" className="text-blue-500 hover:text-blue-700">
-                    ← Back to Concepts
+                    ← Back to Dashboard
                 </Link>
                 </div>
             </nav>

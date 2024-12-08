@@ -4,12 +4,13 @@
 Recall univariate normal distributions $\mathcal{N}(\mu, \sigma^2)$
 
 $$
-p(x) = \frac{1}{Z} \exp \left( -\frac{1}{2\sigma^2} (x - \mu)^2 \right), \quad Z = \sqrt{2 \pi \sigma^2} \\
-
-\mu = \mathbb{E}_p[x] = \int x p(x) \, dx \\
-
+p(x) = \frac{1}{Z} \exp \left( -\frac{1}{2\sigma^2} (x - \mu)^2 \right), \quad Z = \sqrt{2 \pi \sigma^2} 
+$$
+$$
+\mu = \mathbb{E}_p[x] = \int x p(x) \, dx 
+$$
+$$
 \sigma^2 = \mathbb{E}_p[(x - \mu)^2]
-
 $$
 
 Where $Z$ is a normalization factor that ensures the PDF integrates to 1. 
@@ -46,8 +47,9 @@ $$
 Which must satisfy the same two conditions as other PDFs
 
 $$
-\text{1. } p(\mathbf{x}) \geq 0\\
-
+\text{1. } p(\mathbf{x}) \geq 0
+$$
+$$
 \text{2. } \int_{\mathbb{R}^d} p(\mathbf{x}) \, d\mathbf{x} = 1
 $$
 
@@ -56,19 +58,19 @@ We parameterize the multivariate PDFs with a mean vector $\mu$ and a covariance 
 - It is d x 1 dimmensional.
 
 $$
-\mu = \mathbb{E}_p[\mathbf{x}] = \begin{bmatrix} \mathbb{E}_p[x_1] \\ \vdots \\ \mathbb{E}_p[x_d] \end{bmatrix}\\
-
+\mu = \mathbb{E}_p[\mathbf{x}] = \begin{bmatrix} \mathbb{E}_p[x_1] \\ \vdots \\ \mathbb{E}_p[x_d] \end{bmatrix}
+$$
+$$
 \mathbb{E}_p[x_i] = \int p(\mathbf{x}) x_i \, d\mathbf{x}
-
 $$
 
 - The covariance matrix is dxd
 
 $$
-\Sigma = \begin{bmatrix} \text{cov}(x_i, x_j) \end{bmatrix}_{ij}\\
-
+\Sigma = \begin{bmatrix} \text{cov}(x_i, x_j) \end{bmatrix}_{ij}
+$$
+$$
 \text{cov}(x_i, x_j) = \mathbb{E}[(x_i - \mu_i)(x_j - \mu_j)]
-
 $$
 
 
@@ -76,14 +78,13 @@ $$
 
 The covariance matrix is symmetric
 $$
-\Sigma = \begin{bmatrix} \sigma_{11} & \sigma_{12} \\ \sigma_{21} & \sigma_{22} \end{bmatrix} \\
-
-\sigma_i = \mathbb{E}[(x_i - \mu_i)^2] = \sigma^2 \quad \text{along diagonal}\\
-
+\Sigma = \begin{bmatrix} \sigma_{11} & \sigma_{12} \\ \sigma_{21} & \sigma_{22} \end{bmatrix}
+$$
+$$
+\sigma_i = \mathbb{E}[(x_i - \mu_i)^2] = \sigma^2 \quad \text{along diagonal}
+$$
+$$
 \sigma_{ij} = \mathbb{E}[(x_i - \mu_i)(x_j - \mu_j)] = \text{cov}(x_i, x_j)
-
-
-
 $$
 
 <br>
