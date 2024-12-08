@@ -64,3 +64,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.katex-display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
