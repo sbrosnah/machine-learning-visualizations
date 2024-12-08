@@ -20,7 +20,7 @@ export default function BlogPostCard({ title, description, route, tags }: BlogPo
           <CardDescription className="mt-2">{description}</CardDescription>
           <div className="flex items-end flex-wrap">
             {tags.map((tag, index) => (
-              <span key={index} className={`mt-1 mr-1 px-2 py-1 rounded-full text-sm bg-gray-300 text-gray-800 text-nowrap`}>
+              <span key={index} className={`mt-1 mr-1 px-2 py-1 rounded-full text-sm bg-blue-500 text-white text-nowrap`}>
                 {tag}
               </span>
             ))}
