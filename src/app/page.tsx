@@ -1,4 +1,5 @@
 import BlogPostCard from "./components/BlogPostCard";
+import ColorPalette from "./components/ColorPalette";
 
 export default function Home() {
   const algorithms = [
@@ -26,6 +27,7 @@ export default function Home() {
             <BlogPostCard key={algo.route} {...algo} />
           ))}
         </div>
+        <ColorPalette />
       </div>
     </main>
   );
