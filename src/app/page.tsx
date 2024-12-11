@@ -1,7 +1,7 @@
 'use client'
 
 import BlogPostCard from "./components/BlogPostCard";
-import ColorPalette from "./components/ColorPalette";
+// import ColorPalette from "./components/ColorPalette";
 
 export default function Home() {
 
