@@ -31,7 +31,7 @@ export default function Home() {
             <BlogPostCard key={algo.route} {...algo} />
           ))}
         </div>
-        <ColorPalette />
+        {/* <ColorPalette /> */}
       </div>
     </main>
 
