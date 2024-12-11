@@ -12,6 +12,7 @@
     /* --primary: 0 0% 9%; */
     --primary: 217.22, 91.22%, 59.8%;
     --primary-foreground: 0 0% 98%;
+    --primarylight: 213, 94%, 68%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -66,18 +67,6 @@
   }
 }
 
-.katex-display {
-  display: flex;
-  max-width: 100%;
-  overflow-x: auto;
-  height: fit-content;
-  white-space: normal;
-}
-
 .katex-display > .katex {
-  display: flex;
   white-space: pre-wrap !important;
-  line-height: 1.5;
-  height: fit-content;
-  height: 100%;
 }
