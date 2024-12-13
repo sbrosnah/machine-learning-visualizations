@@ -1,6 +1,6 @@
 'use client'
 
-import BlogPostCard from "./components/BlogPostCard";
+import BlogPostCard from "../../components/BlogPostCard";
 // import ColorPalette from "./components/ColorPalette";
 
 export default function Home() {
@@ -10,13 +10,13 @@ export default function Home() {
     {
       title: "Maximum Likelihood Estimation",
       description: "Visualize how MLE finds optimal parameters for probability distributions.",
-      route: "/mle",
+      route: "/blog/mle",
       tags: ["Theory", "Machine Learning"]
     },
     {
       title: "Bayesian Inference",
       description: "Visualize how Bayesian inference updates probability distributions based on data.",
-      route: "/bayesian-inference",
+      route: "/blog/bayesian-inference",
       tags: ["Theory", "Machine Learning"]
     }
   ]
