@@ -8,8 +8,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" className='w-full h-full'>
+      <body className={`${inter.className} antialiased w-full h-full`}>{children}</body>
     </html>
   );
 }

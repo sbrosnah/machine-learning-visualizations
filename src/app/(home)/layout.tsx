@@ -7,6 +7,7 @@ import { FaGithub } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from 'react';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
@@ -21,9 +22,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <div className={clsx('', {'dark': isDarkMode})}>
-            <div className="flex w-full h-14 p-6 px-12 justify-between fixed">
-                {/* These are the lefticons in the top bar */}
+
+        <div className={clsx('h-full w-full', {'dark': isDarkMode})}>
+            <div className="fixed z-10 flex w-full h-14 p-6 px-12 justify-between items-center bg-white">
                 <div className='flex w-max'>
                     <button onClick={toggleSideNav}>
                         <MenuRoundedIcon fontSize='large'/>
@@ -42,17 +43,28 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     </button>
                 </div>
             </div>
-            {/* This is everything below the side bar */}
-            <div className='flex flex-row'>
-                <nav className="fixed top-16 h-full w-48 bg-primary border-red-400 border-8">
+            <div className='flex flex-row w-full h-full'>
+                <nav className={clsx("fixed z-12 h-[calc(100%-3.5rem)] w-64 top-14 transition-transform duration-300", {
+                    "-translate-x-64": !isSideNavOpen,
+                    "translate-x-0": isSideNavOpen
+                })}>
 
+                    <ul className="list-none p-0">
+                        <li className="m-4 ml-12"><Link href="/">Home</Link></li>
+                        <li className="m-4 ml-12"><Link href="/about">About</Link></li>
+                        <li className="m-4 ml-12"><Link href="/contact">Contact</Link></li>
+                    </ul>
                 </nav>
-                <div className='overflow-auto'>
-                    {children}
-                </div>
-            </div>
-            
-        </div>
 
+                
+                <main className={clsx('z-0 h-max transition-all duration-300 pt-20', {
+                    "translate-x-64 w-[calc(100%-16rem)]": isSideNavOpen,
+                    "w-full": !isSideNavOpen
+                })}>
+                    {isSideNavOpen && <div className="fixed top-0 left-0 min-h-screen h-full w-full bg-black bg-opacity-50 z-10" onClick={toggleSideNav}></div>}
+                    {children}
+                </main>
+            </div>
+        </div>
     );
 }
