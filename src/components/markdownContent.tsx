@@ -14,6 +14,8 @@ import { LegacyRef } from 'react';
 
 export default function MarkdownContent({ content, refObjects }: { content: string, refObjects: RefsMap}) {
 
+    const scrollMarginTop = '4.5rem'
+
 
     return (
         <article className="w-full h-max px-4 py-8">
@@ -27,37 +29,37 @@ export default function MarkdownContent({ content, refObjects }: { content: stri
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h1 id={id} ref={ref as LegacyRef<HTMLHeadingElement> } style={{scrollMarginTop: '4rem'}}>{children}</h1>
+                        return <h1 id={id} ref={ref as LegacyRef<HTMLHeadingElement> } style={{scrollMarginTop: scrollMarginTop}}>{children}</h1>
                     },
                     h2({ children }) {
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h2 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h2>
+                        return <h2 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: scrollMarginTop}}>{children}</h2>
                     },
                     h3({ children }) {
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h3 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h3>
+                        return <h3 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: scrollMarginTop}}>{children}</h3>
                     },
                     h4({ children }) {
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h4 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h4>
+                        return <h4 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: scrollMarginTop}}>{children}</h4>
                     },
                     h5({ children }) {
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h5 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h5>
+                        return <h5 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: scrollMarginTop}}>{children}</h5>
                     },
                     h6({ children }) {
                         const text = String(children);
                         const id = generateId(text);
                         const ref = refObjects[id]
-                        return <h6 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h6>
+                        return <h6 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: scrollMarginTop}}>{children}</h6>
                     },
                     code(props) {
                         const {children, className, node, ...rest} = props

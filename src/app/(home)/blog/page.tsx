@@ -1,6 +1,6 @@
 'use client'
 
-import BlogPostCard from "../../components/BlogPostCard";
+import BlogPostCard from "@/components/blogPostCard";
 
 export default function Home() {
 

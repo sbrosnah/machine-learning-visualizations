@@ -1,5 +1,5 @@
-import { getMarkdownContent } from '@/lib/markdown-utils';
-import MLEClientPage from "./clientPage";
+import { getMarkdownContent } from '@/lib/server-side-utils';
+import MLEClientPage from "@/app/(home)/blog/(concepts)/mle/clientPage";
 
 export default function MLEPage() {
 

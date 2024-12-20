@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription } from "@/app/components/card"
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/card"
 import Link from "next/link"
 
 export interface BlogPostCardProps {

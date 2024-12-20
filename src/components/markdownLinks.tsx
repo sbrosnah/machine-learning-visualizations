@@ -2,14 +2,23 @@
 
 import Link from "next/link";
 import TocRoundedIcon from '@mui/icons-material/TocRounded';
-import { useState } from "react";
+import { useContext } from "react";
 import clsx from "clsx";
+import { MarkdownNavOpenContext } from "@/lib/contexts";
 
 export default function MarkdownLinks({ headers, activeSection, onLinkClick }: {
     headers: { level: number, text: string, id: string }[], 
     activeSection: string,
     onLinkClick: (id: string) => void }) {
-    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
+    const markdownNavContext = useContext(MarkdownNavOpenContext)
+
+    if (!markdownNavContext) {
+        throw new Error('ChildComponent must be used within a MarkdownNavOpenContext.Provider');
+    }
+
+    const { value: isSideNavOpen, setValue: setIsSideNavOpen } = markdownNavContext;
+    
 
     const toggleSideNav = () => {
         setIsSideNavOpen(!isSideNavOpen);
@@ -36,7 +45,7 @@ export default function MarkdownLinks({ headers, activeSection, onLinkClick }: {
             <div className={`fixed top-0 left-0 min-h-screen h-full w-full bg-black bg-opacity-50 z-10 ${isSideNavOpen ? "block" : "hidden"}`} onClick={toggleSideNav}></div>
             
             <nav className={clsx("z-20 block pb-14 overflow-y-auto fixed h-[calc(100%-4rem)] pl-4 w-[20rem] top-16 lg:right-0 bg-white transition-all duration-300", {
-                "right-0": isSideNavOpen,
+                "right-0 shadow-[0_0_15px_0_rgb(0,0,0,.3),_0_0_6px_0_rgb(0,0,0,.3)]": isSideNavOpen,
                 "right-[-100%]": !isSideNavOpen
             })}>
                 <Link href="/blog" className="text-blue-400 hover:text-blue-500 text-lg">

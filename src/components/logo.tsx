@@ -1,7 +1,6 @@
-import logo from "../../../public/logo.svg"
-import Image from 'next/image'
 
-export default function Logo(props) {
+
+export default function Logo(props: {width: number, height: number, className: string}) {
 
     return (
         // <svg viewBox="0 0 500.16 500.16" {...props} fill="currentColor">

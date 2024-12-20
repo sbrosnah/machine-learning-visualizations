@@ -11,9 +11,9 @@ import {
     Line,
     Dot
 } from 'recharts';
-import { Card } from '@/app/components/card';
-import { Slider } from '@/app/components/slider'
-import { Button } from '../button';
+import { Card } from '@/components/card';
+import { Slider } from '@/components/slider'
+import { Button } from '@/components/button';
 
 function linspace(start: number, stop: number, num: number, endpoint: boolean = true): number[] {
   if (num <= 0) {
