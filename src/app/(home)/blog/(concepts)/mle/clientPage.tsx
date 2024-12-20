@@ -6,69 +6,76 @@ import CoinFlip from "@/app/components/mle/CoinFlip";
 import { MARKDOWN_DELIMITER } from "@/lib/constants";
 import { RefsMap } from "@/lib/types";
 import { parseMarkdownHeadings } from "@/lib/utils";
-import { debounce } from "@mui/material";
 import Image from "next/image";
-import { createRef, useCallback, useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 
 export default function MLEClientPage({ content}: { content: string} ) {
 
     const [activeSection, setActiveSection] = useState("")
+    const skip = useRef(false);
 
     const markdownChunks = content.split(MARKDOWN_DELIMITER);
     const headers = parseMarkdownHeadings(content)
 
     const refs: RefsMap = {}
+    
 
     headers.forEach(header => {
         refs[header.id] = createRef();
     })
 
+
+    const handleLinkClick = (id: string) => {
+        skip.current = true;
+        setActiveSection(id);
+    }
+
+    const handleLinkNavOpen = (open: boolean) => {
+        //TODO: Pass this up
+
+    }
+
     useEffect(() => {
-        const handleScroll = debounce(() => {
+        const handleScroll = () => {
+            
+            if(skip.current) {
+                return;
+            }
 
-            const threshold = window.innerHeight * .25;
+            const threshold = window.innerHeight * .1;
 
-            //Find the element greater than and closest to the scroll position
+            //TODO: Find a more efficient way to do this
             let closestDist = Infinity;
             let closestKey = ''
-            Object.keys(refs).forEach(key => {
+            for (const key of Object.keys(refs)) {
                 let elPos = refs[key].current?.getBoundingClientRect().y
 
-                //Get the element that is the closest to the top of the screen and is above the halfway mark of the viewport
-                if(elPos && elPos <= threshold && Math.abs(elPos - threshold) < closestDist) {
-                    closestDist = Math.abs(elPos - threshold);
+                if(!elPos){
+                    break
+                }
+
+                const dist = Math.abs(elPos - threshold)
+                if(dist < closestDist) {
+                    closestDist = dist;
                     closestKey = key;
                 }
                 
-            })
+            }
 
-            // setActiveSection(closestKey)
-            // console.log("active section:", activeSection)
-            console.log("closes:", closestKey)
+            setActiveSection(closestKey)
+            
 
-        }, 50); // Adjust debounce time as needed
+        }; 
+
+        handleScroll();
+
+        if (skip.current) {
+            skip.current = false;
+        }
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    
-
-    // useEffect(() => {
-
-    //     Object.keys(refs).forEach(key => {
-    //         const observer = new IntersectionObserver((entries) => {
-    //             entries.forEach(entry => {
-    //                 console.log(entry)
-    //             });
-    //         }, {
-    //         threshold: 0, // Trigger when the element is visible at any part.
-    //         })
-    //         const ref = refs[key].current
-    //         if(ref) { observer.observe(ref) }
-    //     })
-
-    // }, [])
+    }, [activeSection]);
 
 
     return (
@@ -85,7 +92,7 @@ export default function MLEClientPage({ content}: { content: string} ) {
             <Image className="max-w-5xl mx-auto px-4 py-8 w-full h-auto" src="/images/negated-log.png" alt="Gaussian Plot" width={700} height={500}/>
             <MarkdownContent content={markdownChunks[5]} refObjects={refs}/> 
             
-            <MarkdownLinks headers={headers}/>
+            <MarkdownLinks headers={headers} activeSection={activeSection} onLinkClick={handleLinkClick}/>
         </>
 
     );

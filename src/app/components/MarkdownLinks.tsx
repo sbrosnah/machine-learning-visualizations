@@ -5,7 +5,10 @@ import TocRoundedIcon from '@mui/icons-material/TocRounded';
 import { useState } from "react";
 import clsx from "clsx";
 
-export default function MarkdownLinks({ headers }: {headers: { level: number, text: string, id: string }[]}) {
+export default function MarkdownLinks({ headers, activeSection, onLinkClick }: {
+    headers: { level: number, text: string, id: string }[], 
+    activeSection: string,
+    onLinkClick: (id: string) => void }) {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
     const toggleSideNav = () => {
@@ -15,10 +18,18 @@ export default function MarkdownLinks({ headers }: {headers: { level: number, te
     const closeSideNav = () => {
         setIsSideNavOpen(false);
     }
+
+    const handleLinkClick = (id: string) => {
+        closeSideNav();
+        onLinkClick(id);
+    }
     
     return (
         <>
-            <div onClick={toggleSideNav} className="fixed z-30 bottom-10 right-10 p-1 rounded-full bg-blue-400 lg:hidden transition-transform duration-200 transform hover:scale-125 shadow-lg shadow-gray-400">
+            <div onClick={toggleSideNav} className={`fixed z-30 bottom-10 right-10 p-1 rounded-full bg-blue-400 
+                lg:hidden transition-transform duration-200 transform hover:scale-125 shadow-lg shadow-gray-400 
+                ${isSideNavOpen ? "shadow-md shadow-stone-500" : "shadow-md shadow-gray-400"}`}>
+
                 <TocRoundedIcon fontSize='large' className="text-gray-200"/>
             </div>
 
@@ -32,9 +43,11 @@ export default function MarkdownLinks({ headers }: {headers: { level: number, te
                     <p className="pb-2 pt-2">← Back to Dashboard</p>
                 </Link>
                 {headers.map((item, index) => {
-                    return <Link key={index} href={`/blog/mle#${item.id}`} className="text-blue-400 hover:text-blue-500">
-                        <p onClick={closeSideNav} className={`p-1 pr-4 text-sm pl-${item.level}`}>{item.text}</p>
-                    </Link>
+                    return <span key={index} className={`flex w-full h-max p-1 pr-4 pl-${item.level}`}>
+                        <Link href={`/blog/mle#${item.id}`} className="text-blue-400 hover:text-blue-500">
+                            <p onClick={() => handleLinkClick(item.id)} className={`transition-all duration-100  ${item.id === activeSection ? "text-md text-blue-500" : "text-sm"}`}>{item.text}</p>
+                        </Link>
+                    </span>
                 })}
 
             </nav>
