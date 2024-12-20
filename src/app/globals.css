@@ -67,6 +67,9 @@
   }
 }
 
-.katex-display > .katex {
+.katex {
   white-space: pre-wrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
+

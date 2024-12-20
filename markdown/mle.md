@@ -498,11 +498,15 @@ Where $q$ is the true population distribution and $p$ is our model's distributio
 KL Divergence has the following properties:
 - $KL(q \parallel p) \geq 0$ for any $q$ and $p$.
 - $KL(q \parallel p) = 0$ if and only if $q = p$.
-- $KL(q \parallel p) = 
+- 
+$$
+KL(q \parallel p) = 
 \begin{cases} 
 \sum_x q(x) \left( \log \frac{q(x)}{p(x)} \right) & \text{If } x \text{ is discrete} \\[10pt]
 \int q(x) \log \frac{q(x)}{p(x)} \, dx & \text{If } x \text{ is continuous}
-\end{cases}$
+\end{cases}
+$$
+
 - $KL(q \parallel p) \neq KL(p \parallel q)$
 
 Let's prove that $KL(q \parallel p) \geq 0$ for any $q$ and $p$.

@@ -20,7 +20,7 @@ export default function Home() {
     }
   ]
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="px-6 pb-6 max-w-6xl mx-auto">
       <h1 className="text-6xl font-bold mb-4">Spencer&apos;s Blog Posts</h1>
       <p className="text-blue-500 mb-8">
         Click on a card below to explore math and machine learning concepts with visualizations, tutorials, and more!</p>

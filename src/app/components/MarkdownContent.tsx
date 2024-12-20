@@ -9,8 +9,10 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {materialDark, materialLight} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import rehypeRaw from 'rehype-raw'; //For rendering html in markdown
 import { generateId } from '@/lib/utils'
+import { RefsMap } from '@/lib/types';
+import { LegacyRef } from 'react';
 
-export default function MarkdownContent({ content }: { content: string}) {
+export default function MarkdownContent({ content, refObjects }: { content: string, refObjects: RefsMap}) {
 
 
     return (
@@ -21,40 +23,41 @@ export default function MarkdownContent({ content }: { content: string}) {
                 remarkPlugins={[remarkGfm, remarkMath]} 
                 rehypePlugins={[rehypeKatex, rehypeRaw]}
                 components = {{
-                                        h1({ children }) {
+                    h1({ children }) {
                         const text = String(children);
-                        const id = generateId(text)
-                        return <h1 id={id} style={{scrollMarginTop: '4rem'}}>{children}</h1>
+                        const id = generateId(text);
+                        const ref = refObjects[id]
+                        return <h1 id={id} ref={ref as LegacyRef<HTMLHeadingElement> } style={{scrollMarginTop: '4rem'}}>{children}</h1>
                     },
                     h2({ children }) {
                         const text = String(children);
                         const id = generateId(text);
-                        
-                        return <h2 id={id} style={{scrollMarginTop: '4rem'}}>{children}</h2>
+                        const ref = refObjects[id]
+                        return <h2 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h2>
                     },
                     h3({ children }) {
                         const text = String(children);
                         const id = generateId(text);
-                        
-                        return <h3 id={id} style={{scrollMarginTop: '4rem'}}>{children}</h3>
+                        const ref = refObjects[id]
+                        return <h3 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h3>
                     },
                     h4({ children }) {
                         const text = String(children);
                         const id = generateId(text);
-                        
-                        return <h4 id={id} style={{scrollMarginTop: '4rem'}}>{children}</h4>
+                        const ref = refObjects[id]
+                        return <h4 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h4>
                     },
                     h5({ children }) {
                         const text = String(children);
                         const id = generateId(text);
-                        
-                        return <h5 id={id}>{children}</h5>
+                        const ref = refObjects[id]
+                        return <h5 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h5>
                     },
                     h6({ children }) {
                         const text = String(children);
                         const id = generateId(text);
-                        
-                        return <h6 id={id}>{children}</h6>
+                        const ref = refObjects[id]
+                        return <h6 id={id} ref={ref as LegacyRef<HTMLHeadingElement>} style={{scrollMarginTop: '4rem'}}>{children}</h6>
                     },
                     code(props) {
                         const {children, className, node, ...rest} = props

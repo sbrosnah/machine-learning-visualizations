@@ -121,8 +121,8 @@ export default function CoinFlip() {
 
 
     return (
-        <Card className="p-6 space-y-6">
-            <div className="space-y-4">
+        <Card className="space-y-6">
+            <div className="p-6 space-y-4">
                 <div className="space-y-2">
                     <label className="text-sm font-medium">True Parameter</label>
                     <Slider
@@ -143,7 +143,7 @@ export default function CoinFlip() {
                 </div>
             </div>
 
-            <div className='w-full flex flex-row content-between items-center justify-between'>
+            <div className='p-6 w-full flex flex-row content-between items-center justify-between'>
                 <Button 
                     //This is how events are handled. Functions aren't executed directly. Instead the functions are passed in and will be called when the event occurs.
                     onClick={flipCoin}
